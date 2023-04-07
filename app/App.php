@@ -1,6 +1,6 @@
 <?php
 class App {
-    private $__controller, $__action, $__params;
+    private $__controller, $__action, $__params, $__routes;
     function __construct() {
         global $routes;
 
@@ -37,7 +37,10 @@ class App {
         // Load controller class
         if (file_exists('app/controllers/'.($this->__controller).'.php')) {
             require_once 'controllers/'.($this->__controller).'.php';
-            $this->__controller = new $this->__controller();
+            if (class_exists($this->__controller)) {
+                $this->__controller = new $this->__controller();
+                unset($urlArr[0]);
+            }
         } else {
             $this->loadError();
         }
@@ -50,8 +53,10 @@ class App {
 
         $this->__params = array_values($urlArr);
 
-        // Call the method to execute the action
-        call_user_func_array([$this->__controller, $this->__action], $this->__params);
+        if (method_exists($this->__controller, $this->__action)) {
+            // Call the method to execute the action
+            call_user_func_array([$this->__controller, $this->__action], $this->__params);
+        }
     }
 
     public function loadError($name='404') {
