@@ -1,9 +1,13 @@
 <?php
+require_once _DIR_ROOT.'/app/dao/UserDao.php';
+
 class User extends Controller {
     public function login() {
-        echo 'Logging in... ';
-        $request = new Request();
-        $data = $request->getFields();
-        echo 'Username is: '.$data['username'];
+        $req = new Request();
+        $data = $req->getFields();
+
+        $userDao = new Userdao();
+        $user = $userDao->getUser($data['username']);
+        echo $user['name'];
     }
 }

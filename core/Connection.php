@@ -21,7 +21,7 @@ class Connection {
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ];
             //Câu lệnh kết nối
-            self::$conn = new PDO($dsn, $db_config['user'], $db_config['password'], $options);;
+            self::$conn = new PDO($dsn, $db_config['user'], $db_config['password'], $options);
 
         }catch (Exception $exception){
             $mess = $exception->getMessage();

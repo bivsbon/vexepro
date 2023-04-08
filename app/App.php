@@ -1,6 +1,6 @@
 <?php
 class App {
-    private $__controller, $__action, $__params, $__routes;
+    private $__controller, $__action, $__params;
     public static $app;
     function __construct() {
         global $routes;
