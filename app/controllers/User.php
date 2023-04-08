@@ -7,7 +7,6 @@ class User extends Controller {
         $data = $req->getFields();
 
         $userDao = new Userdao();
-        $user = $userDao->getUser($data['username']);
-        echo $user['name'];
+        $userDao->getUser($data['username']);
     }
 }

@@ -2,12 +2,12 @@
 class UserDao {
     public function getUser($username) {
         $conn = Connection::getInstance()->getConnection();
+        $username_search = "'$username'";
 
-        $sql = "SELECT * FROM users WHERE username=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$username]);
-        return $stmt->fetch();
+        $builder = new MySqlBuilder($conn);
+        $users = $builder->select('*')->from('users')->where('username', 'like', $username_search)->all();
+        foreach ($users as $user) {
+            echo $user->address;
+        }
     }
-
-    public function deleteUser()
 }
