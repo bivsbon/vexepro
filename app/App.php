@@ -1,8 +1,10 @@
 <?php
 class App {
     private $__controller, $__action, $__params, $__routes;
+    public static $app;
     function __construct() {
         global $routes;
+        self::$app = $this;
 
         if (!empty($routes['default_controller'])) {
             $this->__controller = $routes['default_controller'];

@@ -1,6 +1,6 @@
 <?php
 class Home extends Controller {
     public function index() {
-        echo 'Main page';
+        $this->render('test_view');
     }
 }
