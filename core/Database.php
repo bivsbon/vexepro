@@ -1,0 +1,56 @@
+<?php
+class Database {
+    public static function add(string $table, array $data) : bool {
+        $conn = Connection::getInstance()->getConnection();
+        $columns = implode(', ', array_keys($data));
+        $values = array_values($data);
+
+        $s = sizeof($data);
+        $blanks = implode(', ', array_fill(0, $s, '?'));
+
+        $sql = "INSERT INTO ".$table."(".$columns.") values (".$blanks.")";
+
+        $stmt = $conn->prepare($sql);
+
+        $ret = $stmt->execute($values);
+        return true;
+    }
+
+    public static function get(string $table, string $col, string $comparison, int $value) : object {
+        $conn = Connection::getInstance()->getConnection();
+
+        $builder = new MySqlBuilder($conn);
+        $obj = $builder
+            ->select('*')
+            ->from($table)
+            ->where($col, $comparison, $value)
+            ->first();
+
+        return $obj;
+    }
+
+    public static function getAll(string $table) : array {
+        $conn = Connection::getInstance()->getConnection();
+
+        $builder = new MySqlBuilder($conn);
+        $data = $builder
+            ->select()
+            ->from('agencies')
+            ->all();
+
+        return $data;
+    }
+
+    public static function deleteByID(string $table, int $id) : bool {
+        $conn = Connection::getInstance()->getConnection();
+
+        $sql = "DELETE FROM ".$table." WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+
+        return $stmt->execute([$id]);
+    }
+
+    public static function updateValue($table, string $col, string $comparison, int $value, ) {
+
+    }
+}

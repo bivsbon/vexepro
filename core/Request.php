@@ -1,29 +1,29 @@
 <?php
 class Request {
-    public function getMethod() {
+    public static function getMethod() {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
-    public function isPost() {
-        return $this->getMethod() == 'post';
+    public static function isPost() {
+        return self::getMethod() == 'post';
     }
 
-    public function isGet() {
-        return $this->getMethod() == 'get';
+    public static function isGet() {
+        return self::getMethod() == 'get';
     }
 
-    public function getFields() {
+    public static function getFields() {
         $data = [];
-        if ($this->isGet()) {
-            $data = $this->getFields2($_GET);
+        if (self::isGet()) {
+            $data = self::getFields2($_GET);
         }
-        if ($this->isPost()) {
-            $data = $this->getFields2($_POST);
+        if (self::isPost()) {
+            $data = self::getFields2($_POST);
         }
         return $data;
     }
 
-    private function getFields2($method) {
+    private static function getFields2($method) {
         $dataFields = [];
 
         if (!empty($method)) {

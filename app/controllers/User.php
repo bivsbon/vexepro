@@ -1,26 +1,30 @@
 <?php
-require_once _DIR_ROOT.'/app/dao/UserDao.php';
+require_once _DIR_ROOT.'/app/services/UserService.php';
 
 class User extends Controller {
     public function login() {
-        $req = new Request();
-        $data = $req->getFields();
+        $data = Request::getFields();
         $userDao = new UserDao();
         $user = $userDao->getUser($data['username']);
 
         if (password_verify($data['password'], $user->hashpwd)) {
-            $_SESSION['login'] = true;
-            $this->render('login-success');
+            $_SESSION['name'] = $user->name;
+            $this->render('home');
         } else $this->render('login-fail');
     }
 
     public function signup() {
-        $req = new Request();
-        $data = $req->getFields();
+        $data = Request::getFields();
+        $data['role'] = 'Customer';
 
-        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
-        echo $data['password'];
-        $userDao = new UserDao();
-        $userDao->addUser(array_values($data));
+        $userService = new UserService();
+        $userService->addUser($data);
+
+        $this->render('home');
+    }
+
+    public function logout() {
+        unset($_SESSION['name']);
+        $this->render('home');
     }
 }

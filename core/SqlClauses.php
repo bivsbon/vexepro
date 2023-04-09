@@ -73,6 +73,10 @@ trait SqlClauses
         return $this;
     }
 
+    public function delete() {
+
+    }
+
     /**
      * Apply from clause.
      *

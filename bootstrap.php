@@ -13,5 +13,6 @@ require_once 'core/Request.php';
 require_once 'core/SqlClauses.php';
 require_once 'core/BaseSqlBuilder.php';
 require_once 'core/MySqlBuilder.php';
+require_once 'core/Database.php';
 
 require_once 'app/App.php';
