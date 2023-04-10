@@ -1,6 +1,7 @@
 <?php
 class Connection {
-    private static $instance = null, $conn = null;
+    private static ?PDO $conn = null;
+    private static ?Connection $instance = null;
 
     private function __construct(){
         global $config;
@@ -22,7 +23,6 @@ class Connection {
             ];
             //Câu lệnh kết nối
             self::$conn = new PDO($dsn, $db_config['user'], $db_config['password'], $options);
-
         }catch (Exception $exception){
             $mess = $exception->getMessage();
             App::$app->loadError('database', ['message'=>$mess]);
@@ -30,7 +30,7 @@ class Connection {
         }
     }
 
-    public static function getInstance() {
+    public static function getInstance(): ?Connection {
         if (self::$instance == null) {
             self::$instance = new Connection();
         }

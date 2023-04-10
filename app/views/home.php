@@ -7,3 +7,4 @@ if (!array_key_exists('name', $_SESSION)) {
 }
 ?>
 <hr>
+<a href="/vexepro/util/tripseeding">SEED</a>
