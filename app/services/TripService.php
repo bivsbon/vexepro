@@ -41,4 +41,13 @@ class TripService {
         }
         echo 'Done!';
     }
+
+    public function search(array $filter) : array {
+        // Set default values
+        if (!array_key_exists('price_low', $filter)) $filter['price_low'] = 0;
+        if (!array_key_exists('price_high', $filter)) $filter['price_high'] = 10000000;
+        if (!array_key_exists('price_low', $filter)) $filter['price_low'] = 0;
+        if (!array_key_exists('price_low', $filter)) $filter['price_low'] = 0;
+        if (!array_key_exists('price_low', $filter)) $filter['price_low'] = 0;
+    }
 }
