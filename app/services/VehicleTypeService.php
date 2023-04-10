@@ -4,7 +4,7 @@ class VehicleTypeService {
         return Database::add('vehicle_types', $data);
     }
 
-    public function get(string $col, string $comparison, string $value) : array {
+    public function get(string $col, string $comparison, mixed $value) : array {
         return Database::get('vehicle_types', $col, $comparison, $value);
     }
 

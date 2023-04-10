@@ -8,7 +8,7 @@ class UserService {
         return Database::add('users', $data);
     }
 
-    public function get(string $col, string $comparison, string $value) : array {
+    public function get(string $col, string $comparison, mixed $value) : array {
         return Database::get('users', $col, $comparison, $value);
     }
 

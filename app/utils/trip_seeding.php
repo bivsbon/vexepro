@@ -1,2 +1,3 @@
 <?php
-require_once '../../bootstrap.php';
+$num = 2;
+echo "'$num'";

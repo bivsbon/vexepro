@@ -15,10 +15,11 @@ class Database {
         return $stmt->execute($values);
     }
 
-    public static function get(string $table, string $col, string $comparison, int $value) : array {
+    public static function get(string $table, string $col, string $comparison, mixed $value) : array {
         $conn = Connection::getInstance()->getConnection();
 
         $builder = new MySqlBuilder($conn);
+
         $obj = $builder
             ->select('*')
             ->from($table)

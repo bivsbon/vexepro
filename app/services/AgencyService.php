@@ -4,7 +4,7 @@ class AgencyService {
         return Database::add('agencies', $data);
     }
 
-    public function get(string $col, string $comparison, string $value) : array {
+    public function get(string $col, string $comparison, mixed $value) : array {
         return Database::get('agencies', $col, $comparison, $value);
     }
 

@@ -5,7 +5,7 @@ class TicketService {
         return Database::add('tickets', $data);
     }
 
-    public function get(string $col, string $comparison, string $value) : array {
+    public function get(string $col, string $comparison, mixed $value) : array {
         return Database::get('tickets', $col, $comparison, $value);
     }
 

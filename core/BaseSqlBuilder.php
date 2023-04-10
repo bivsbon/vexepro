@@ -198,11 +198,12 @@ abstract class BaseSqlBuilder
     protected function getParseWhereParameters(array $params): array
     {
         if (count($params) === 3) {
+            $params[2] = "'$params[2]'";
             return $params;
         }
 
         if (count($params) === 2) {
-            return [$params[0], $this->comparisons['equal'], $params[1]];
+            return [$params[0], $this->comparisons['equal'], "'$params[1]'"];
         }
 
         die('Not valid where parameters.');

@@ -1,11 +1,6 @@
 <?php
-class Route {
+class Route extends Controller {
     public function add() {
         $data = Request::getFields();
-
-        $routeService = new RouteService();
-        $routeService->addRoute($data);
-
-        $this->render('home');
     }
 }

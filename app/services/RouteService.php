@@ -6,7 +6,7 @@ class RouteService {
         return Database::add('routes', $data);
     }
 
-    public function get(string $col, string $comparison, string $value) : array {
+    public function get(string $col, string $comparison, mixed $value) : array {
         return Database::get('routes', $col, $comparison, $value);
     }
 

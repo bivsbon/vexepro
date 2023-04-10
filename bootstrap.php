@@ -3,9 +3,7 @@ require_once 'configs/routes.php';
 require_once 'configs/database.php';
 
 require_once 'core/Connection.php';
-global $config;
-$db_config = array_filter($config['database']);
-$mysqlCon = Connection::getInstance($db_config);
+$mysqlCon = Connection::getInstance();
 
 require_once 'core/Controller.php';
 require_once 'core/Route.php';
