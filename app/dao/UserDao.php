@@ -20,6 +20,7 @@ class UserDao {
 //        $stmt = $conn->prepare($sql);
 //        $stmt->execute($user);
 
+        $user = Database::get('users', 'username', 'like', 'bivsbon');
         return Database::add('users', $user);
     }
 }

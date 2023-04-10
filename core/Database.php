@@ -12,11 +12,10 @@ class Database {
 
         $stmt = $conn->prepare($sql);
 
-        $ret = $stmt->execute($values);
-        return true;
+        return $stmt->execute($values);
     }
 
-    public static function get(string $table, string $col, string $comparison, int $value) : object {
+    public static function get(string $table, string $col, string $comparison, int $value) : array {
         $conn = Connection::getInstance()->getConnection();
 
         $builder = new MySqlBuilder($conn);
@@ -24,7 +23,7 @@ class Database {
             ->select('*')
             ->from($table)
             ->where($col, $comparison, $value)
-            ->first();
+            ->all();
 
         return $obj;
     }
@@ -41,7 +40,7 @@ class Database {
         return $data;
     }
 
-    public static function deleteByID(string $table, int $id) : bool {
+    public static function delete(string $table, int $id) : bool {
         $conn = Connection::getInstance()->getConnection();
 
         $sql = "DELETE FROM ".$table." WHERE id = ?";
@@ -50,7 +49,12 @@ class Database {
         return $stmt->execute([$id]);
     }
 
-    public static function updateValue($table, string $col, string $comparison, int $value, ) {
+    public static function update(string $table, string $col, string $value, int $id) : bool {
+        $conn = Connection::getInstance()->getConnection();
 
+        $sql = "UPDATE ".$table." SET ".$col." = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+
+        return $stmt->execute([$value, $id]);
     }
 }

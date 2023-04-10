@@ -108,7 +108,7 @@ abstract class BaseSqlBuilder
      *
      * @return string
      */
-    protected function getCompiledSelectClause()
+    protected function getCompiledSelectClause(): string
     {
         return 'select ' . implode(', ', $this->select);
     }
@@ -119,7 +119,7 @@ abstract class BaseSqlBuilder
      * @param  array  $tables
      * @return void
      */
-    protected function addFrom(array $tables)
+    protected function addFrom(array $tables): void
     {
         foreach ($tables as $key => $table) {
             $tables[$key] = $this->identifierOf($table);
@@ -133,7 +133,7 @@ abstract class BaseSqlBuilder
      *
      * @return string
      */
-    protected function getCompiledFromClause()
+    protected function getCompiledFromClause(): string
     {
         return 'from ' . implode(', ', $this->from);
     }
@@ -141,13 +141,13 @@ abstract class BaseSqlBuilder
     /**
      * Add condition for where clause.
      *
-     * @param  string  $field
-     * @param  string  $operator
-     * @param  mixed  $value
-     * @param  string  $logicOperators
+     * @param string $field
+     * @param string $operator
+     * @param mixed $value
+     * @param string $logicOperator
      * @return void
      */
-    protected function addWhere($field, $operator, $value, $logicOperator = 'and')
+    protected function addWhere(string $field, string $operator, mixed $value, string $logicOperator = 'and'): void
     {
         if (! in_array($operator, $this->comparisons)) {
             die("$operator is invalid operator.");
@@ -176,11 +176,11 @@ abstract class BaseSqlBuilder
     /**
      * Add condition with logic operator to where clause.
      *
-     * @param  string  $logicOperator
+     * @param string $logicOperator
      * @param  array  $params
      * @return $this
      */
-    protected function whereLogicOperator($logicOperator, ...$params)
+    protected function whereLogicOperator(string $logicOperator, ...$params)
     {
         list($field, $operator, $value) = $this->getParseWhereParameters($params);
 
@@ -195,7 +195,7 @@ abstract class BaseSqlBuilder
      * @param  array  $params
      * @return array
      */
-    protected function getParseWhereParameters(array $params)
+    protected function getParseWhereParameters(array $params): array
     {
         if (count($params) === 3) {
             return $params;
@@ -213,7 +213,7 @@ abstract class BaseSqlBuilder
      *
      * @return string
      */
-    protected function getCompiledWhereClause()
+    protected function getCompiledWhereClause(): string
     {
         if (empty($this->where)) {
             return '';
@@ -236,10 +236,10 @@ abstract class BaseSqlBuilder
     /**
      * Get the identifier of a field or a table.
      *
-     * @param  string  $identifier
+     * @param string $identifier
      * @return string
      */
-    protected function identifierOf($identifier)
+    protected function identifierOf(string $identifier): string
     {
         $identifier = strtolower($identifier);
 
@@ -257,10 +257,10 @@ abstract class BaseSqlBuilder
     /**
      * Get the identifier (include as keyword) of a field or a table.
      *
-     * @param  string  $identifier
+     * @param string $identifier
      * @return string
      */
-    protected function identifierWithAsKeywordOf($identifier)
+    protected function identifierWithAsKeywordOf(string $identifier): string
     {
         $data = explode(' as ', $identifier);
 
@@ -277,10 +277,10 @@ abstract class BaseSqlBuilder
     /**
      * Get the identifier (include as dot) of a field or a table.
      *
-     * @param  string  $identifier
+     * @param string $identifier
      * @return string
      */
-    protected function identifierWithDotOf($identifier)
+    protected function identifierWithDotOf(string $identifier): string
     {
         $data = explode('.', $identifier);
 
@@ -299,7 +299,7 @@ abstract class BaseSqlBuilder
      *
      * @return string
      */
-    public function getCompiledSelectStatement()
+    public function getCompiledSelectStatement(): string
     {
         $clauses['select'] = $this->getCompiledSelectClause();
         $clauses['from'] = $this->getCompiledFromClause();
@@ -316,7 +316,7 @@ abstract class BaseSqlBuilder
      * @param  array  $values
      * @return string
      */
-    protected function getValueForInClause(array $values)
+    protected function getValueForInClause(array $values): string
     {
         return '(' . implode(', ', $values) . ')';
     }
@@ -327,7 +327,7 @@ abstract class BaseSqlBuilder
      * @param  array  $values
      * @return string
      */
-    protected function getValueForBetweenClause(array $values)
+    protected function getValueForBetweenClause(array $values): string
     {
         if (count($values) !== 2) {
             die('This is invalid for between clause.');
@@ -341,7 +341,7 @@ abstract class BaseSqlBuilder
      *
      * @return void
      */
-    protected function clearAllClauses()
+    protected function clearAllClauses(): void
     {
         $this->select = [];
         $this->from = [];

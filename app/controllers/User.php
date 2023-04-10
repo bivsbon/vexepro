@@ -2,28 +2,34 @@
 require_once _DIR_ROOT.'/app/services/UserService.php';
 
 class User extends Controller {
-    public function login() {
-        $data = Request::getFields();
-        $userDao = new UserDao();
-        $user = $userDao->getUser($data['username']);
+    private UserService $userService;
+    public function __construct() {
+        $this->userService = new UserService();
+    }
 
-        if (password_verify($data['password'], $user->hashpwd)) {
-            $_SESSION['name'] = $user->name;
+    public function login() : void {
+        $data = Request::getFields();
+        $user = $this->userService->get('username', 'like', $data['username'])[0];
+
+        if (password_verify($data['password'], $user->password)) {
+            $_SESSION['userObj'] = $user;
             $this->render('home');
         } else $this->render('login-fail');
     }
 
-    public function signup() {
+    public function signup() : void {
         $data = Request::getFields();
-        $data['role'] = 'Customer';
+        $user = $this->userService->get('username', 'like', $data['username']);
 
-        $userService = new UserService();
-        $userService->addUser($data);
+        if (!$user) {
+            $userService = new UserService();
+            $userService->add($data);
 
-        $this->render('home');
+            $this->render('home');
+        } else $this->render('signup'); // username exists
     }
 
-    public function logout() {
+    public function logout() : void {
         unset($_SESSION['name']);
         $this->render('home');
     }

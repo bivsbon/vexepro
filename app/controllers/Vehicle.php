@@ -1,6 +1,6 @@
 <?php
 class Vehicle {
-    public function add() {
-
+    public function addType() {
+        
     }
 }

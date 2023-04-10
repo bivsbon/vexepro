@@ -1,6 +1,6 @@
 <?php
 class TicketDao {
-    public function add() {
+    public function getByUserID(string $username) : array {
 
     }
 }

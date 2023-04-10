@@ -1,18 +1,18 @@
 <?php
 class Request {
-    public static function getMethod() {
+    public static function getMethod() : string {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
-    public static function isPost() {
+    public static function isPost() : bool {
         return self::getMethod() == 'post';
     }
 
-    public static function isGet() {
+    public static function isGet() : bool {
         return self::getMethod() == 'get';
     }
 
-    public static function getFields() {
+    public static function getFields() : array {
         $data = [];
         if (self::isGet()) {
             $data = self::getFields2($_GET);
@@ -23,7 +23,7 @@ class Request {
         return $data;
     }
 
-    private static function getFields2($method) {
+    private static function getFields2(array $method) : array {
         $dataFields = [];
 
         if (!empty($method)) {

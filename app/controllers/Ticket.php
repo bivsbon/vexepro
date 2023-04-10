@@ -1,8 +1,8 @@
 <?php
+require_once _DIR_ROOT.'/app/services/TicketService.php';
 
-class Ticket {
-    public function book($ticket) {
-
+class Ticket extends Controller {
+    public function book($ticket) : void {
         $data = Request::getFields();
 
         $userService = new UserService();
