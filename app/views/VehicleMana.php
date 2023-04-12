@@ -1,6 +1,6 @@
 <html>
 <head>
-<title> Tôi </title>
+<title> Quản lý xe </title>
 <link rel="stylesheet" href="./Home.css"/>
 <link rel="stylesheet" href="./Me.css"/>
 <link rel="stylesheet" href="./TripMana.css"/>
