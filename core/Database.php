@@ -29,13 +29,26 @@ class Database {
         return $obj;
     }
 
+    public static function getDistinct(string $table, string $col) : array {
+        $conn = Connection::getInstance()->getConnection();
+
+        $builder = new MySqlBuilder($conn);
+
+        $obj = $builder
+            ->select('distinct('.$col.')')
+            ->from($table)
+            ->all();
+
+        return $obj;
+    }
+
     public static function getAll(string $table) : array {
         $conn = Connection::getInstance()->getConnection();
 
         $builder = new MySqlBuilder($conn);
         $data = $builder
             ->select()
-            ->from('agencies')
+            ->from($table)
             ->all();
 
         return $data;

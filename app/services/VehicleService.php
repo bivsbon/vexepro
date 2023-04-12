@@ -19,4 +19,14 @@ class VehicleService {
     public function delete(int $id) : bool {
         return Database::delete('vehicles', $id);
     }
+
+    public function genPlateNumber($n) : array {
+        $plate_numbers = [];
+        for ($i = 0; $i < $n; $i++) {
+            $prefix = rand(29, 33) . chr(rand(65, 70));
+            $plate_numbers[$i] = $prefix . '-' . rand(100, 999) . '.' . rand(10, 99);
+        }
+
+        return $plate_numbers;
+    }
 }

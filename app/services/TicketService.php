@@ -1,5 +1,4 @@
 <?php
-require_once _DIR_ROOT.'/app/dao/TicketDao.php';
 class TicketService {
     public function add(array $data) : bool {
         return Database::add('tickets', $data);
@@ -17,7 +16,7 @@ class TicketService {
         return Database::update('tickets', $col, $value, $id);
     }
 
-    public function delete(int $id) : bool {
-        return Database::delete('tickets', $id);
+    public function cancel(int $id) : bool {
+        return Database::update('tickets', 'status', 'canceled', $id);
     }
 }

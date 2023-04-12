@@ -16,7 +16,7 @@ class Connection {
          * - Cấu hình ngoại lệ khi truy vấn bị lỗi
          * */
         $options = [
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ];
         //Câu lệnh kết nối
@@ -30,7 +30,7 @@ class Connection {
         return self::$instance;
     }
 
-    public function getConnection() {
+    public function getConnection() : object {
         return self::$conn;
     }
 }

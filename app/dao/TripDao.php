@@ -13,8 +13,9 @@ class TripDao {
             .' WHERE s1.location = ? AND s2.location = ?'
             .' AND price >= ? AND price <= ? AND DATE(t.start_time) = ?';
         $stmt = $conn->prepare($sql);
-        $trips = $stmt->execute($filter);
+        $stmt->execute($filter);
 
-        return [];
+        return $stmt->fetchAll();
+
     }
 }

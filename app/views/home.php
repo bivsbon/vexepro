@@ -8,3 +8,16 @@ if (!array_key_exists('userObj', $_SESSION)) {
 ?>
 <hr>
 <a href="/vexepro/util/tripseeding">SEED</a>
+
+<form action="home/add">
+    <label>
+        <input type="text" name="name">
+        <input type="submit">
+    </label>
+</form>
+<br>
+
+<?php
+foreach ($data as $province) {
+    echo $province->province.'<br>';
+}

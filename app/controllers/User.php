@@ -10,18 +10,18 @@ class User extends Controller {
         $this->ticketService = new TicketService();
     }
 
-    public function login() : void {
-        $data = Request::getFields();
-        $user = $this->userService->get('username', 'like', $data['username'])[0];
+    public function userLogin() : void {
+        $this->login('customer');
+    }
 
-        if (password_verify($data['password'], $user->password)) {
-            $_SESSION['userObj'] = $user;
-            $this->render('home');
-        } else $this->render('login-fail');
+    public function adminLogin() : void {
+        $this->login('admin');
     }
 
     public function signup() : void {
         $data = Request::getFields();
+        $data['role'] = 'customer';
+        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
         $user = $this->userService->get('username', 'like', $data['username']);
         if (!$user) {
             $userService = new UserService();
@@ -38,8 +38,22 @@ class User extends Controller {
 
     public function info() : void {
         $id = $_SESSION['userOBj']->id;
-        $tickets = $this->ticketService->get('id', 'equals', $id);
+        $tickets = $this->ticketService->get('id', 'equal', $id);
 
         $this->render('userinfo');
+    }
+
+    /**
+     * @return void
+     */
+    private function login(string $role): void
+    {
+        $data = Request::getFields();
+        $user = $this->userService->get('username', 'like', $data['username'])[0];
+
+        if (password_verify($data['password'], $user->password) && $user->role == $role) {
+            $_SESSION['userObj'] = $user;
+            $this->render('home');
+        } else $this->render('login-fail');
     }
 }

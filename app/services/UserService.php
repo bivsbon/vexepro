@@ -1,10 +1,6 @@
 <?php
-require_once _DIR_ROOT.'/app/dao/UserDao.php';
-
 class UserService {
     public function add(array $data) : bool {
-        $data['role'] = 'customer';
-        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
         return Database::add('users', $data);
     }
 
