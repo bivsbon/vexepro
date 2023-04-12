@@ -10,8 +10,15 @@
 VÉ XE PRO
 </div>
 <div class="navbar-left">
-<div class="button primary-button">Đăng nhập</div>
-<div class="button secondary-button">Đăng ký</div>
+<?php
+print("<div class='button'>Tôi</div>
+<div class='button'>Mã giảm giá</div>
+<div class='button'>Liên hệ</div>
+");
+
+print("<div class='button primary-button'>Đăng nhập</div>
+<div class='button secondary-button'>Đăng ký</div>");
+?>
 </div>
 </nav>
 <main>
