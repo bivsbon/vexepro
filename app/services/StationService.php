@@ -21,6 +21,12 @@ class StationService {
     }
 
     public function getProvinces() : array {
-        return Database::getDistinct('stations', 'province');
+        $objArr = Database::getDistinct('stations', 'province');
+
+        $provinces = [];
+        foreach ($objArr as $province) {
+            $provinces[] = $province->province;
+        }
+        return $provinces;
     }
 }

@@ -1,54 +1,59 @@
 <html>
 <head>
     <title> Trang chủ </title>
-    <link rel="stylesheet" href="./Home.css"/>
+    <link rel="stylesheet" href="/vexepro/app/views/Home.css"/>
 </head>
 <body>
 <nav class="navbar">
     <div class="logo">
-        <img src="../assets/images/logo.png" alt="logo"/>
+        <img src="/vexepro/app/assets/images/logo.png" alt="logo"/>
         VÉ XE PRO
     </div>
     <div class="navbar-left">
-        <div class="button primary-button">Đăng nhập</div>
-        <div class="button secondary-button">Đăng ký</div>
+        <?php
+        if (!array_key_exists('userObj', $_SESSION)) {
+            print('<div class="button primary-button">Đăng nhập</div>
+        <div class="button secondary-button">Đăng ký</div>');
+        } else {
+
+        }
+
+        ?>
     </div>
 </nav>
 <main>
     <div class="hero">
-        <div class="search-bar">
-            <div class="search-input">
-                <div class="search-item">
-                    <label>Nơi xuất phát</label>
-                    <select name="source" class="search-input-item">
-                        <?php
-                        $tinhthanh = [["label" => "Hà Tĩnh", "value" => "ha-tinh"],["label" => "Hà Nội", "value" => "ha-noi"]];
-                        foreach($tinhthanh as $key => $val){
-                            print("<option value={$val["value"]}>{$val["label"]}</option>");
-                        }
-                        ?>
-
-                    </select>
+        <form action="/vexepro/trip/search">
+            <div class="search-bar">
+                <div class="search-input">
+                    <div class="search-item">
+                        <label>Nơi xuất phát</label>
+                        <select name="beginning" class="search-input-item">
+                            <?php
+                            foreach($provinces as $province){
+                                echo '<option value="'.$province.'">'.$province.'</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="search-item">
+                        <label>Nơi đến</label>
+                        <select name="destination" class="search-input-item">
+                            <?php
+                            foreach($provinces as $province){
+                                echo '<option value="'.$province.'">'.$province.'</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="search-item">
+                        <label>Ngày đi</label>
+                        <input type="date" name="start_date" class="search-input-item"/>
+                    </div>
                 </div>
-                <div class="search-item">
-                    <label>Nơi đến</label>
-                    <select name="destination" class="search-input-item">
-                        <?php
-                        $tinhthanh = [["label" => "Hà Tĩnh", "value" => "ha-tinh"],["label" => "Hà Nội", "value" => "ha-noi"]];
-                        foreach($tinhthanh as $key => $val){
-                            print("<option value={$val["value"]}>{$val["label"]}</option>");
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="search-item">
-                    <label>Ngày đi</label>
-                    <input type="date" name="start_date" class="search-input-item"/>
-                </div>
+                <button class="search-button" type="submit"> Tìm chuyến</button>
             </div>
-            <div class="search-button"> Tìm chuyến</div>
-
-        </div>
+        </form>
     </div>
     <div class="container">
         <div class="show-title"> Tuyến đường phổ biến </div>
@@ -62,15 +67,15 @@
             ];
             foreach($arrData as $key => $val){
                 print("<div class='show-item'>
-    <div class='show-img'>
-<img src={$val["img"]} alt='car'/>
-</div>
-    <div class='show-desc'>
-<div class='show-item-title'>{$val["title"]}</div>
-<div>Chỉ từ {$val["price"]}đ</div>
-</div>
-</div>
-");
+                  <div class='show-img'>
+                  <img src={$val["img"]} alt='car'/>
+                  </div>
+                  <div class='show-desc'>
+                  <div class='show-item-title'>{$val["title"]}</div>
+                  <div>Chỉ từ {$val["price"]}đ</div>
+                  </div>
+                  </div>
+                  ");
             }
             ?>
         </div>
@@ -87,15 +92,15 @@
             ];
             foreach($arrData as $key => $val){
                 print("<div class='show-item'>
-    <div class='show-img'>
-<img src={$val["img"]} alt='car'/>
-</div>
-    <div class='show-desc'>
-<div class='show-item-title'>{$val["title"]}</div>
-<div>Chỉ từ {$val["price"]}đ</div>
-</div>
-</div>
-");
+                  <div class='show-img'>
+                  <img src={$val["img"]} alt='car'/>
+                  </div>
+                  <div class='show-desc'>
+                  <div class='show-item-title'>{$val["title"]}</div>
+                  <div>Chỉ từ {$val["price"]}đ</div>
+                  </div>
+                  </div>
+                  ");
             }
             ?>
         </div>

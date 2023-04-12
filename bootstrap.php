@@ -14,6 +14,6 @@ require_once 'core/BaseSqlBuilder.php';
 require_once 'core/MySqlBuilder.php';
 require_once 'core/Database.php';
 
-require_once 'app/utils/language.php';
+require_once 'app/utils/helper.php';
 
 require_once 'app/App.php';

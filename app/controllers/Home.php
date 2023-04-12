@@ -3,12 +3,17 @@ require_once _DIR_ROOT.'/app/services/TicketService.php';
 require_once _DIR_ROOT.'/app/services/StationService.php';
 
 class Home extends Controller {
+    private StationService $stationService;
+
+    public function __construct() {
+        $this->stationService = new StationService();
+    }
 
     public function index(): void {
-        $ss = new StationService();
-//        $ss->add();
-        $provinces = $ss->getProvinces();
-        $this->render('home', $provinces);
+        $data = [];
+        $data['provinces'] = $this->stationService->getProvinces();
+
+        $this->render('Home', $data);
     }
 
     public function add() : void {

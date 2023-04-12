@@ -34,4 +34,28 @@ class TripService {
     public function search(array $filter) : array {
         return $this->tripDao->search($filter);
     }
-}
+
+    public function decreaseRemainingSlots(int $id, int $amount) : bool {
+        $trip = Database::get('trips', 'id', '=', $id);
+
+        if ($trip == null) return false;
+        else $trip = $trip[0];
+
+        if ($trip->remaining_slots >= $amount)
+            Database::update('trips', 'remaining_slots', $trip->remaining_slots-$amount, $id);
+        else
+            return false;
+
+        return true;
+    }
+
+    public function getUnavailableSeats(int $tripID) : array {
+        $objArr = $this->tripDao->getUnavailableSeats($tripID);
+
+        $seats = [];
+        foreach ($objArr as $seat) {
+            $seats[] = $seat->seat;
+        }
+        return $seats;
+    }
+ }
