@@ -11,8 +11,9 @@
 VÉ XE PRO
 </div>
 <div class="navbar-left">
-<div class="button primary-button">Đăng nhập</div>
-<div class="button secondary-button">Đăng ký</div>
+<div class="button">Tôi</div>
+<div class="button">Mã giảm giá</div>
+<div class="button">Liên hệ</div>
 </div>
 </nav>
 <main>
@@ -25,49 +26,119 @@ VÉ XE PRO
 </div>
 <?php
 print("<script type='text/javascript'>
+    const tickets = [
+        {
+            id: '1',
+            start_place: 'Giường bệnh',
+            end_place: 'Nghĩa địa',
+            price: '100.000',
+            start_time: '10h:00m pm',
+            est_time: '10h',
+            owner: 'Le Viet Hoang',
+            agency_name: 'Nha xe rong vang',
+            vehicle_type: 'Xe mai tang',
+            seat: 'Thương gia'
+        },
+        {
+            id: '2',
+            start_place: 'Giường bệnh',
+            end_place: 'Nghĩa địa',
+            price: '100.000',
+            start_time: '10h:00m pm',
+            est_time: '10h',
+            owner: 'Le Viet Hoang',
+            agency_name: 'Nha xe rong vang',
+            vehicle_type: 'Xe mai tang',
+            seat: 'Thương gia'
+        },
+    ]
     const tabs = [
-{
-title: 'Thông tin cá nhân',
-id: 1,
-render: `
-<div>
-    <div>Trang cá nhân</div>
-</div>
-`
-},
-{
-title: 'Quản lý vé',
-id: 1,
-render: `
-<div>
-    <div>Quản lý vé</div>
-</div>
-`
-},
-{
-title: 'Mã giảm giá',
-id: 1,
-render: `
-<div>
-    <div>Mã giảm giá</div>
-</div>
-`
-}
-];
-let menu = document.getElementById('tab-menu');
-let content = document.getElementById('tab-content');
-tabs.forEach(item => {
-
-let element = document.createElement('div');
-element.classList.add('tab-item');
-element.classList.add('tab' + item.id);
-element.setO
-element.innerText = item.title;
-menu.appendChild(element);
-})
-function onChangeTab(tabId){
-    content.innerHTML = item.render;
-}
+        {
+            title: 'Thông tin cá nhân',
+            id: 'tab-1',
+            render: `
+            <div>
+                <div class='form-wrapper'>
+                    <label>Tên người dùng</label>
+                    <input class='form-item' name='username' value='Tên người dùng'/>
+                </div>
+                <div class='form-wrapper'>
+                    <label>Họ và tên</label>
+                    <input class='form-item' name='fullname' value='Họ và tên'/>
+                </div>
+                <div class='form-wrapper'>
+                    <label>Số điện thoại</label>
+                    <input class='form-item' name='phone' value='Số điện thoại'/>
+                </div>
+                <div class='form-wrapper'>
+                    <label>Địa chỉ</label>
+                    <textarea rows={2} class='form-item' name='address' value='Địa chỉ'/>
+                </div>
+            </div>
+            `
+        },
+        {
+            title: 'Quản lý vé',
+            id: 'tab-2',
+            render: `
+            <div>
+                <div>Quản lý vé</div>
+                \${(function fun(){
+                    let ct = '';
+                    for(let i=0; i<tickets.length; i++){
+                        ct += `<div class='ticket-item-wrapper'>
+                                    <div class='ticket-id'>No.\${tickets[i].id}</div>    
+                                    <div class='ticket-content'>
+                                        <div class='ticket-content-l'>
+                                            <div style='font-size:18px'><b>Người mua:</b><i> \${tickets[i].owner}</i></div>
+                                            <div><b>Nhà xe:</b> \${tickets[i].agency_name}</div>
+                                        </div>
+                                        <div class='ticket-content-r'>Giá vé: \${tickets[i].price}đ</div>
+                                        </div>    
+                                    <div class='ticket-datetime'>
+                                        <div class='ticket-datetime-l'>
+                                            <div><b> Điểm đi:</b> \${tickets[i].start_place}</div>
+                                            -
+                                            <div><b> Điểm đến:</b> \${tickets[i].end_place}</div>
+                                        </div>
+                                        <div class='ticket-datetime-r'><b>Thời gian:</b> \${tickets[i].start_time}</div>
+                                    </div>    
+                               </div>` 
+                    }
+                    return ct;
+                })()}
+            </div>
+            `
+        },
+        {
+            title: 'Mã giảm giá',
+            id: 'tab-3',
+            render: `
+            <div>
+                <div>Mã giảm giá</div>
+            </div>
+            `
+        }
+    ];
+    let activeTab = tabs[0].id;
+    let menu = document.getElementById('tab-menu');
+    let content = document.getElementById('tab-content');
+    content.innerHTML = tabs[0].render;
+    tabs.forEach(item => {
+        let element = document.createElement('div');
+        element.classList.add('tab-item');
+        element.id = item.id;
+        element.onclick=function(){onChangeTab(item)};
+        element.innerText = item.title;
+        menu.appendChild(element);
+    })
+    document.getElementById(activeTab).classList.add('active');
+    function onChangeTab(tab){
+        content.innerHTML = tab.render;
+        document.getElementById(activeTab).classList.remove('active');
+        document.getElementById(tab.id).classList.add('active');
+        activeTab = tab.id;
+    }
 </script>");
 
 ?>
