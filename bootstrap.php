@@ -4,8 +4,6 @@ require_once 'configs/database.php';
 
 require_once 'core/Connection.php';
 
-$mysqlCon = Connection::getInstance();
-
 require_once 'core/Controller.php';
 require_once 'core/Route.php';
 require_once 'core/Request.php';

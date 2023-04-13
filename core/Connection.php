@@ -1,9 +1,10 @@
 <?php
 class Connection {
     private static ?PDO $conn = null;
-    private static ?Connection $instance = null;
 
-    private function __construct(){
+    private function __construct(){}
+
+    public static function get() : object {
         global $config;
         $db_config = array_filter($config['database']);
         //Kết nối database
@@ -21,16 +22,6 @@ class Connection {
         ];
         //Câu lệnh kết nối
         self::$conn = new PDO($dsn, $db_config['user'], $db_config['password'], $options);
-    }
-
-    public static function getInstance(): ?Connection {
-        if (self::$instance == null) {
-            self::$instance = new Connection();
-        }
-        return self::$instance;
-    }
-
-    public function getConnection() : object {
         return self::$conn;
     }
 }

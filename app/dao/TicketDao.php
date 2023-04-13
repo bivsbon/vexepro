@@ -1,7 +1,7 @@
 <?php
 class TicketDao {
     public function getByUserID(int $uid) : array {
-        $conn = Connection::getInstance()->getConnection();
+        $conn = Connection::get();
 
         $sql = 'SELECT u.id, ti.id id, seat, status, start_time, est_time, remaining_slots, price, plate_num, a.name agency_name,'
             .'vt.`type` vehicle_type, `row`, `level`, s1.`name` start_station, s1.province start_province,'
@@ -21,7 +21,7 @@ class TicketDao {
     }
 
     public function getUnavailableSeats($tripID) : array {
-        $conn = Connection::getInstance()->getConnection();
+        $conn = Connection::get();
 
         $sql = "SELECT seat FROM tickets ti"
             ." JOIN trips t ON ti.trip_id=t.id"

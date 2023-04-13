@@ -17,23 +17,35 @@
                         <form action="/vexepro/trip/search">
                             <div class="form-item">
                                 <label>Nơi đi</label>
-                                <select class="form-input"></select>
+                                <select name="beginning" class='form-input'>
+                                    <?php
+                                    foreach($provinces as $province){
+                                        echo '<option value="'.$province.'">'.$province.'</option>';
+                                    }
+                                    ?>
+                                </select>
                             </div>
                             <div class="form-item">
                                 <label> Nơi đến</label>
-                                <select class="form-input"/></select>
+                                <select name="destination" class="form-input">
+                                    <?php
+                                    foreach($provinces as $province){
+                                        echo '<option value="'.$province.'">'.$province.'</option>';
+                                    }
+                                    ?>
+                                </select>
                             </div>
                             <div class="form-item">
                                 <label>Ngày đi</label>
-                                <select class="form-input"></select>
+                                <input type="date" name="start_date" class="form-input"></input>
                             </div>
                             <div class="form-item">
                                 <label>Giá thấp nhất</label>
-                                <input class="form-input"/>
+                                <input name="price_low" class="form-input"/>
                             </div>
                             <div class="form-item">
                                 <label>Giá cao nhất</label>
-                                <input class="form-input"/>
+                                <input name="price_high" class="form-input"/>
                             </div>
                             <button class='button primary-button' style='width: 100%'>Tìm kiếm</button>
                         </form>

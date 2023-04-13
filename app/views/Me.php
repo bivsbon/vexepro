@@ -101,16 +101,6 @@
                         `
                     },
                     {
-                        title: 'Mã giảm giá',
-                        id: 'tab-3',
-                        render: `
-                        <div>
-                            <div>Mã giảm giá</div>
-                        </div>
-                        `
-                    
-                    },
-                    {
                     title: 'Đăng xuất',
                     id:'tab-4',
                     render: `

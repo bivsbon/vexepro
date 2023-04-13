@@ -1,7 +1,7 @@
 <?php
 class TripDao {
     public function search(array $filter) : array {
-        $conn = Connection::getInstance()->getConnection();
+        $conn = Connection::get();
 
         $sql = 'SELECT t.id id, start_time, HOUR(est_time) est_hour, MINUTE(est_time) est_minute,'
             .' time(start_time) start_time_specific, est_time, remaining_slots, price, plate_num, a.name agency_name,'
@@ -21,7 +21,7 @@ class TripDao {
     }
 
     public function getUnavailableSeats($tripID) : array {
-        $conn = Connection::getInstance()->getConnection();
+        $conn = Connection::get();
 
         $sql = "SELECT seat FROM tickets ti"
             ." JOIN trips t ON ti.trip_id=t.id"

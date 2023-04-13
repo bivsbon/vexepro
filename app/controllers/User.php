@@ -13,7 +13,7 @@ class User extends Controller {
         $this->home = new Home();
     }
 
-    public function login() : void {
+    public function login($i, $j) : void {
         $data = Request::getFields();
         $user = $this->userService->get('username', 'like', $data['username'])[0];
 

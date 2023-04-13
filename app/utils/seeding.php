@@ -111,5 +111,9 @@ $names = ['loc', 'duc', 'anh', 'an', 'long', 'hung', 'phuong', 'nhi', 'huyen', '
 $addresses = ['Quảng Bình', 'Hà Tĩnh', 'Thanh Hóa', 'Nam Đinh', 'Đà Nẵng', 'Hà Nội', 'Huế', 'Nha Trang', 'Hải Phòng'];
 
 echo 'Seeding...    ';
+
+//user_seed($names, $addresses);
+//trip_seed(30);
 ticket_seed(20);
+
 echo 'Done!';
