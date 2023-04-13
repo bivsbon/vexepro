@@ -5,17 +5,9 @@
         <link rel="stylesheet" href="/vexepro/app/views/Me.css"/>
     </head>
     <body>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="/vexepro/app/assets/images/logo.png" alt="logo"/>
-                VÉ XE PRO
-            </div>
-            <div class="navbar-left">
-                <div class="button">Tôi</div>
-                <div class="button">Mã giảm giá</div>
-                <div class="button">Liên hệ</div>
-            </div>
-        </nav>
+        <?php
+        require_once _DIR_ROOT.'/app/views/Navbar.php';
+        ?>
         <main>
             <div class="container">
             <div class="card">
@@ -116,6 +108,16 @@
                             <div>Mã giảm giá</div>
                         </div>
                         `
+                    
+                    },
+                    {
+                    title: 'Đăng xuất',
+                    id:'tab-4',
+                    render: `
+                    <div>
+                    <a class='button danger-button' href='/vexepro/user/logout'>Đăng xuất</a>
+                    </div>
+                    `
                     }
                 ];
                 let activeTab = tabs[0].id;

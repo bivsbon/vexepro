@@ -6,15 +6,16 @@ require_once _DIR_ROOT.'/app/controllers/Home.php';
 class User extends Controller {
     private UserService $userService;
     private TicketService $ticketService;
+    private Home $home;
     public function __construct() {
         $this->userService = new UserService();
         $this->ticketService = new TicketService();
+        $this->home = new Home();
     }
 
     public function userLogin() : void {
         if ($this->login('customer')) {
-            $home = new Home();
-            $home->index();
+            $this->home->index();
         }
         else $this->render('Login');
     }
@@ -32,13 +33,13 @@ class User extends Controller {
             $userService = new UserService();
             $userService->add($data);
 
-            $this->render('home');
+            $this->home->index();
         } else $this->render('signup'); // username exists
     }
 
     public function logout() : void {
-        unset($_SESSION['name']);
-        $this->render('home');
+        unset($_SESSION['userObj']);
+        $this->home->index();
     }
 
     public function info() : void {

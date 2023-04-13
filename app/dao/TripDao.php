@@ -3,8 +3,9 @@ class TripDao {
     public function search(array $filter) : array {
         $conn = Connection::getInstance()->getConnection();
 
-        $sql = 'SELECT t.id id, start_time, est_time, remaining_slots, price, plate_num, a.name agency_name,'
-            .'vt.`type` vehicle_type, `row`, `level`, s1.`name` start_station, s1.province start_province,'
+        $sql = 'SELECT t.id id, start_time, HOUR(est_time) est_hour, MINUTE(est_time) est_minute,'
+            .' time(start_time) start_time_specific, est_time, remaining_slots, price, plate_num, a.name agency_name,'
+            .'vt.`type` vehicle_type, `row`, `level`, `line`, s1.`name` start_station, s1.province start_province,'
             .' s2.`name` end_station, s2.province end_province FROM trips t'
             .' JOIN vehicles v ON t.vehicle_id = v.id'
             .' JOIN agencies a ON v.agency_id = a.id'

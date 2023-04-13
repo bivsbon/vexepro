@@ -1,11 +1,14 @@
 <?php
+define('_DIR_ROOT', 'C:/xampp/htdocs/vexepro');
 require_once '../../configs/database.php';
 require_once '../../core/Database.php';
 require_once '../../core/Connection.php';
 require_once '../../core/SqlClauses.php';
 require_once '../../core/BaseSqlBuilder.php';
 require_once '../../core/MySqlBuilder.php';
+require_once '../../app/services/TripService.php';
 require_once 'helper.php';
+
 
 function trip_seed(int $n) : void
 {
@@ -61,13 +64,14 @@ function user_seed(array $names, array $addresses) : void {
 }
 
 function ticket_seed($nTrips) : void {
+    $tripService = new TripService();
     $conn = Connection::getInstance()->getConnection();
     $trips = Database::getAll('trips');
     shuffle($trips);
     $userArr = genArr(10);
 
     for ($i = 0; $i < $nTrips; $i++) {
-        $nTickets = rand(2, 5);
+        $nTickets = rand(3, 5);
         shuffle($userArr);
 
         $sql = 'SELECT vt.`row` as `row`, vt.`level` as `level`, vt.`line` as line FROM trips t'
@@ -91,6 +95,7 @@ function ticket_seed($nTrips) : void {
             $data['seat'] = intToSeat($seatsInt[$j], $vData['row'], $vData['level'], $vData['line']);
             Database::add('tickets', $data);
         }
+        $tripService->decreaseRemainingSlots($i, $nTickets);
     }
 }
 

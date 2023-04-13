@@ -6,8 +6,8 @@
     <div class="navbar-left">
         <?php
         if (!array_key_exists('userObj', $_SESSION)) {
-            print('<div class="button primary-button">Đăng nhập</div>
-                <div class="button secondary-button">Đăng ký</div>');
+            print('<a class="button primary-button" href="/vexepro/app/views/Login.php">Đăng nhập</a>
+                <a class="button secondary-button" href="/vexepro/app/views/Register.php">Đăng ký</a>');
         } else {
             print("<a class='button' href='/vexepro/home/me'>Tôi</a>
                     <div class='button'>Mã giảm giá</div>

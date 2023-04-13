@@ -11,7 +11,7 @@ class Ticket extends Controller {
 
         $this->ticketService->add($data);
 
-        $this->render('home');
+        $this->render('Home');
     }
 
     public function cancel() : void {
