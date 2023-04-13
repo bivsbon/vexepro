@@ -49,6 +49,7 @@ print("<div class='button primary-button'>Đăng nhập</div>
 <label>Giá cao nhất</label>
 <input class="form-input"/>
 </div>
+<button class='button primary-button' style='width: 100%'>Tìm kiếm</button>
 </form>
 </div>
 <div class="search-content">
@@ -93,7 +94,7 @@ print("
 print("
 <script type='text/javascript'>
 let current_id = 0;
-    function onShow(id){
+    function onShow(id, row, level, seat){
 let form = document.createElement('div');
 form.innerHTML = ` 
 <form class='form-wrapper'>
@@ -101,15 +102,39 @@ form.innerHTML = `
 <div class='form-item'>
 <input name='id' value='\${id}' style='visibility:hidden;display:none'/>
 <label>Số hàng</label>
-<select class='form-input' name='row'></select>
+<select class='form-input' name='row'>
+\${(function fun(){
+var options = '';
+for(let i = 1; i<=row; i++){
+options += '<option value=\'i\'>i</option>';
+}
+return options;
+})()}
+</select>
 </div>
 <div class='form-item'>
 <label>Số tầng</label>
-<select class='form-input' name='row'></select>
+<select class='form-input' name='level'>
+\${(function fun(){
+var options = '';
+for(let i = 1; i<=level; i++){
+options += '<option value=\'i\'>i</option>';
+}
+return options;
+})()}
+</select>
 </div>
 <div class='form-item'>
 <label>Số ghế</label>
-<select class='form-input' name='row'></select>
+<select class='form-input' name='seat'>
+\${(function fun(){
+var options = '';
+for(let i = 1; i<=seat; i++){
+options += '<option value=\'i\'>i</option>';
+}
+return options;
+})()}
+</select>
 </div>
 </div>
 <div style='display:flex;justify-content:end'>
