@@ -72,7 +72,7 @@ print("<script type='text/javascript'>
                 </div>
                 <div class='form-wrapper'>
                     <label>Địa chỉ</label>
-                    <textarea rows={2} class='form-item' name='address' value='Địa chỉ'/>
+                    <input class='form-item' name='address' value='Địa chỉ'/>
                 </div>
             </div>
             `
@@ -118,7 +118,16 @@ print("<script type='text/javascript'>
                 <div>Mã giảm giá</div>
             </div>
             `
-        }
+        },
+{
+title: 'Đăng xuất',
+id:'tab-4',
+render: `
+<div>
+<button class='button danger-button'>Đăng xuất</button>
+</div>
+`
+}
     ];
     let activeTab = tabs[0].id;
     let menu = document.getElementById('tab-menu');
