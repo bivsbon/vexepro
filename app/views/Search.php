@@ -53,17 +53,10 @@ print("<div class='button primary-button'>Đăng nhập</div>
 </div>
 <div class="search-content">
 <?php
-    $arrData = [
-["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-];
-foreach($arrData as $key => $val){
-print("<div class='search-item'>
+for($i = 1; $i < 11; $i++){
+print("
+<div id='$i' class='search-item-wrapper'>
+<div class='search-item'>
 <div class='search-img-wrapper'>
 <img class='search-img' src='https://static.vexere.com/production/images/1663578798814.jpeg?w=250&h=250'/>
 </div>
@@ -87,13 +80,53 @@ print("<div class='search-item'>
 </div>
 <div>
 <div class='remain'>Còn 10 chỗ trống</div>
-<button style='margin-top: 12px'>Chọn chuyến</button>
+<button style='margin-top: 12px' onclick='onShow($i)'>Chọn chuyến</button>
+</div>
 </div>
 </div>
 </div>
 </div>
 ");
 }
+?>
+<?php 
+print("
+<script type='text/javascript'>
+let current_id = 0;
+    function onShow(id){
+let form = document.createElement('div');
+form.innerHTML = ` 
+<form class='form-wrapper'>
+<div style='display:flex; align-items: center;gap:8px'>
+<div class='form-item'>
+<input name='id' value='\${id}' style='visibility:hidden;display:none'/>
+<label>Số hàng</label>
+<select class='form-input' name='row'></select>
+</div>
+<div class='form-item'>
+<label>Số tầng</label>
+<select class='form-input' name='row'></select>
+</div>
+<div class='form-item'>
+<label>Số ghế</label>
+<select class='form-input' name='row'></select>
+</div>
+</div>
+<div style='display:flex;justify-content:end'>
+<button type='submit' class='button'>Đặt vé</button>
+</div>
+</form>
+`
+let newElement = document.getElementById(String(id));
+newElement.appendChild(form);
+if(current_id !== 0){
+let oldElement = document.getElementById(String(current_id));
+oldElement.removeChild(oldElement.lastChild);
+}
+current_id = id;
+}
+</script>
+")
 ?>
 </div>
 </div>
