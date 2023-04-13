@@ -67,11 +67,11 @@ label {
     margin-bottom: 8px;
 }
 .ticket-item-wrapper {
-   padding: 16px;
-   border-radius: 8px;
-   background: #DEDEDE;
-   max-width: max-content;
-   margin: 16px 0px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #DEDEDE;
+    width: 100%;
+    margin: 16px 0px;
 }
 .ticket-id {
     

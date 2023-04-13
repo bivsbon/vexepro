@@ -1,6 +1,7 @@
 <?php
 require_once _DIR_ROOT.'/app/services/UserService.php';
 require_once _DIR_ROOT.'/app/services/TicketService.php';
+require_once _DIR_ROOT.'/app/controllers/Home.php';
 
 class User extends Controller {
     private UserService $userService;
@@ -11,7 +12,11 @@ class User extends Controller {
     }
 
     public function userLogin() : void {
-        $this->login('customer');
+        if ($this->login('customer')) {
+            $home = new Home();
+            $home->index();
+        }
+        else $this->render('Login');
     }
 
     public function adminLogin() : void {
@@ -46,14 +51,14 @@ class User extends Controller {
     /**
      * @return void
      */
-    private function login(string $role): void
+    private function login(string $role): bool
     {
         $data = Request::getFields();
         $user = $this->userService->get('username', 'like', $data['username'])[0];
 
         if (password_verify($data['password'], $user->password) && $user->role == $role) {
             $_SESSION['userObj'] = $user;
-            $this->render('home');
-        } else $this->render('login-fail');
+            return true;
+        } else return false;
     }
 }

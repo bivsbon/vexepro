@@ -4,25 +4,9 @@
         <link rel="stylesheet" href="/vexepro/app/views/Home.css"/>
     </head>
     <body>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="/vexepro/app/assets/images/logo.png" alt="logo"/>
-                VÉ XE PRO
-            </div>
-            <div class="navbar-left">
-                <?php
-                if (!array_key_exists('userObj', $_SESSION)) {
-                    print('<div class="button primary-button">Đăng nhập</div>
-                <div class="button secondary-button">Đăng ký</div>');
-                } else {
-                    print("<div class='button'>Tôi</div>
-                    <div class='button'>Mã giảm giá</div>
-                    <div class='button'>Liên hệ</div>
-                    ");
-                }
-                ?>
-            </div>
-        </nav>
+        <?php
+        require_once _DIR_ROOT.'/app/views/Navbar.php';
+        ?>
         <main>
             <div class="hero">
                 <form action="/vexepro/trip/search">

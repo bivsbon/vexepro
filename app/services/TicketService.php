@@ -1,5 +1,12 @@
 <?php
+require_once _DIR_ROOT.'/app/dao/TicketDao.php';
+
 class TicketService {
+    private TicketDao $ticketDao;
+
+    public function __construct() {
+        $this->ticketDao = new TicketDao();
+    }
     public function add(array $data) : bool {
         return Database::add('tickets', $data);
     }
@@ -8,7 +15,7 @@ class TicketService {
         return Database::get('tickets', $col, $comparison, $value);
     }
 
-    public function getByUserID() : array {
+    public function getAll() : array {
         return Database::getAll('tickets');
     }
 
@@ -18,5 +25,9 @@ class TicketService {
 
     public function cancel(int $id) : bool {
         return Database::update('tickets', 'status', 'canceled', $id);
+    }
+
+    public function getByUserId(int $uid) : array {
+        return $this->ticketDao->getByUserID($uid);
     }
 }
