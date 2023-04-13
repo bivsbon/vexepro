@@ -1,14 +1,14 @@
 <html>
 <head>
 <title> Tôi </title>
-<link rel="stylesheet" href="./Home.css"/>
-<link rel="stylesheet" href="./Me.css"/>
-<link rel="stylesheet" href="./TripMana.css"/>
+    <link rel="stylesheet" href="/vexepro/app/views/Home.css"/>
+    <link rel="stylesheet" href="/vexepro/app/views/Me.css"/>
+    <link rel="stylesheet" href="/vexepro/app/views/UserMana.css"/>
 </head>
 <body>
 
 <?php
-require_once _DIR_ROOT.'/app/views/Navbar.php';
+require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
 ?>
 <main>
 <div class="container">

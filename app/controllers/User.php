@@ -13,15 +13,23 @@ class User extends Controller {
         $this->home = new Home();
     }
 
-    public function userLogin() : void {
-        if ($this->login('customer')) {
-            $this->home->index();
-        }
-        else $this->render('Login');
-    }
+    public function login() : void {
+        $data = Request::getFields();
+        $user = $this->userService->get('username', 'like', $data['username'])[0];
 
-    public function adminLogin() : void {
-        $this->login('admin');
+        if (password_verify($data['password'], $user->password)) {
+            unset($_SESSION['userObj']);
+            unset($_SESSION['adminObj']);
+            if ($user->role == 'customer') {
+                $_SESSION['userObj'] = $user;
+                $this->render('Home');
+            }
+            if ($user->role == 'admin') {
+                $_SESSION['adminObj'] = $user;
+                $this->render('UserMana');
+            }
+
+        } else $this->render('Login');
     }
 
     public function signup() : void {
@@ -39,6 +47,7 @@ class User extends Controller {
 
     public function logout() : void {
         unset($_SESSION['userObj']);
+        unset($_SESSION['adminObj']);
         $this->home->index();
     }
 
@@ -47,19 +56,5 @@ class User extends Controller {
         $tickets = $this->ticketService->get('id', 'equal', $id);
 
         $this->render('userinfo');
-    }
-
-    /**
-     * @return void
-     */
-    private function login(string $role): bool
-    {
-        $data = Request::getFields();
-        $user = $this->userService->get('username', 'like', $data['username'])[0];
-
-        if (password_verify($data['password'], $user->password) && $user->role == $role) {
-            $_SESSION['userObj'] = $user;
-            return true;
-        } else return false;
     }
 }

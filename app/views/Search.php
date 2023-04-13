@@ -6,7 +6,7 @@
     </head>
     <body>
         <?php
-        require_once _DIR_ROOT.'/app/views/Navbar.php';
+        require_once _DIR_ROOT . '/app/views/CustomerNavbar.php';
         ?>
         <main>
             <div class="container">
@@ -14,7 +14,7 @@
                 <div class="wrapper">
                     <div class="search-filter">
                         <div style="font-size: 18px; border-bottom: 1px solid rgba(0,0,0,0.15);  margin-bottom: 12px;padding-bottom: 12px "> Bộ lọc </div>
-                        <form>
+                        <form action="/vexepro/trip/search">
                             <div class="form-item">
                                 <label>Nơi đi</label>
                                 <select class="form-input"></select>
@@ -35,6 +35,7 @@
                                 <label>Giá cao nhất</label>
                                 <input class="form-input"/>
                             </div>
+                            <button class='button primary-button' style='width: 100%'>Tìm kiếm</button>
                         </form>
                     </div>
                     <div class="search-content">
@@ -87,49 +88,49 @@
             function onShow(id, row, level, line){
         let form = document.createElement('div');
         form.innerHTML = ` 
-        <form class='form-wrapper'>
-        <div style='display:flex; align-items: center;gap:8px'>
-        <div class='form-item'>
-        <input name='id' value='\${id}' style='visibility:hidden;display:none'/>
-        <label>Số hàng</label>
-        <select class='form-input' name='row'>
-        \${(function fun(){
-        var options = '';
-        for(let i = 0; i<row; i++){
-        options += '<option value=\''+i+ '\'>' + String.fromCharCode(65+i) + '</option>';
-        }
-        return options;
-        })()}
-        </select>
-        </div>
-        <div class='form-item'>
-        <label>Số tầng</label>
-        <select class='form-input' name='level'>
-        \${(function fun(){
-        var options = '';
-        for(let i = 1; i<=level; i++){
-        options += '<option value=\''+i+'\'>'+ i +'</option>';
-        }
-        return options;
-        })()}
-        </select>
-        </div>
-        <div class='form-item'>
-        <label>Số ghế</label>
-        <select class='form-input' name='seat'>
-        \${(function fun(){
-        var options = '';
-        for(let i = 1; i<=line; i++){
-        options += '<option value=\''+i+'\'>'+ i + '</option>';
-        }
-        return options;
-        })()}
-        </select>
-        </div>
-        </div>
-        <div style='display:flex;justify-content:end'>
-        <button type='submit' class='button'>Đặt vé</button>
-        </div>
+        <form class='form-wrapper' action='/vexepro/ticket/book'>
+            <div style='display:flex; align-items: center;gap:8px'>
+                <div class='form-item'>
+                    <input name='trip_id' value='\${id}' style='visibility:hidden;display:none'/>
+                    <label>Số hàng</label>
+                    <select class='form-input' name='row'>
+                    \${(function fun(){
+                    var options = '';
+                    for(let i = 0; i<row; i++){
+                    options += '<option value=\''+ String.fromCharCode(65+i) + '\'>' + String.fromCharCode(65+i) + '</option>';
+                    }
+                    return options;
+                    })()}
+                    </select>
+                    </div>
+                    <div class='form-item'>
+                    <label>Số tầng</label>
+                    <select class='form-input' name='level'>
+                    \${(function fun(){
+                    var options = '';
+                    for(let i = 1; i<=level; i++){
+                    options += '<option value=\''+i+'\'>'+ i +'</option>';
+                    }
+                    return options;
+                    })()}
+                    </select>
+                    </div>
+                    <div class='form-item'>
+                    <label>Số ghế</label>
+                    <select class='form-input' name='seat'>
+                    \${(function fun(){
+                    var options = '';
+                    for(let i = 1; i<=line; i++){
+                    options += '<option value=\''+i+'\'>'+ i + '</option>';
+                    }
+                    return options;
+                    })()}
+                    </select>
+                </div>
+            </div>
+            <div style='display:flex;justify-content:end'>
+                <button type='submit' class='button'>Đặt vé</button>
+            </div>
         </form>
         `
         let newElement = document.getElementById(String(id));

@@ -6,7 +6,7 @@
     </head>
     <body>
     <?php
-    require_once _DIR_ROOT.'/app/views/Navbar.php';
+    require_once _DIR_ROOT . '/app/views/CustomerNavbar.php';
     ?>
         <main>
             <div class="container">
@@ -62,7 +62,7 @@
                             </div>
                             <div class='form-wrapper'>
                                 <label>Địa chỉ</label>
-                                <input class='form-item' name='address' value=''$addr'/>
+                                <input class='form-item' name='address' value='$addr'/>
                             </div>
                         </div>
                         `
@@ -83,7 +83,7 @@
                                                         <div style='font-size:18px'><b>Người mua:</b><i> \${tickets[i].owner}</i></div>
                                                         <div><b>Nhà xe:</b> \${tickets[i].agency_name}</div>
                                                     </div>
-                                                    <div class='ticket-content-r'>Giá vé: \${tickets[i].price}đ</div>
+                                                    <div class='ticket-content-r'>Giá vé: \${tickets[i].price/1000}.000đ</div>
                                                     </div>    
                                                 <div class='ticket-datetime'>
                                                     <div class='ticket-datetime-l'>

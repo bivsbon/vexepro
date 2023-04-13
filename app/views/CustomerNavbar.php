@@ -5,14 +5,14 @@
     </a>
     <div class="navbar-left">
         <?php
-        if (!array_key_exists('userObj', $_SESSION)) {
-            print('<a class="button primary-button" href="/vexepro/app/views/Login.php">Đăng nhập</a>
-                <a class="button secondary-button" href="/vexepro/app/views/Register.php">Đăng ký</a>');
-        } else {
+        if (array_key_exists('userObj', $_SESSION)) {
             print("<a class='button' href='/vexepro/home/me'>Tôi</a>
                     <div class='button'>Mã giảm giá</div>
                     <div class='button'>Liên hệ</div>
                     ");
+        } else {
+            print('<a class="button primary-button" href="/vexepro/app/views/Login.php">Đăng nhập</a>
+                <a class="button secondary-button" href="/vexepro/app/views/Register.php">Đăng ký</a>');
         }
         ?>
     </div>

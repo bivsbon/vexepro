@@ -11,7 +11,7 @@
                     <img src="/vexepro/app/assets/images/logo.png" alt="logo" class="logo"/>
                 </div>
 
-                <form action="/vexepro/user/userlogin" method="POST" class="form">
+                <form action="/vexepro/user/login" method="POST" class="form">
                     <label>Tên người dùng</label>
                     <input name="username" placeholder="Nhập tên người dùng" class="form-item"/>
                     <label>Mật khẩu</label>

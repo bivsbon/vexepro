@@ -5,7 +5,7 @@
     </head>
     <body>
         <?php
-        require_once _DIR_ROOT.'/app/views/Navbar.php';
+        require_once _DIR_ROOT . '/app/views/CustomerNavbar.php';
         ?>
         <main>
             <div class="hero">

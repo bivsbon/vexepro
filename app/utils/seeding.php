@@ -86,6 +86,7 @@ function ticket_seed($nTrips) : void {
         $nSeats = $vData['row'] * $vData['level'] * $vData['line'];
         $seatsInt = genArr($nSeats);
         shuffle($seatsInt);
+        $tripService->decreaseRemainingSlots($trips[$i]->id, $nTickets);
 
         for ($j = 0; $j < $nTickets; $j++) {
             $data = [];
@@ -95,7 +96,6 @@ function ticket_seed($nTrips) : void {
             $data['seat'] = intToSeat($seatsInt[$j], $vData['row'], $vData['level'], $vData['line']);
             Database::add('tickets', $data);
         }
-        $tripService->decreaseRemainingSlots($i, $nTickets);
     }
 }
 
@@ -111,5 +111,5 @@ $names = ['loc', 'duc', 'anh', 'an', 'long', 'hung', 'phuong', 'nhi', 'huyen', '
 $addresses = ['Quảng Bình', 'Hà Tĩnh', 'Thanh Hóa', 'Nam Đinh', 'Đà Nẵng', 'Hà Nội', 'Huế', 'Nha Trang', 'Hải Phòng'];
 
 echo 'Seeding...    ';
-ticket_seed(10);
+ticket_seed(20);
 echo 'Done!';
