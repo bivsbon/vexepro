@@ -5,9 +5,9 @@
         <link rel="stylesheet" href="/vexepro/app/views/Me.css"/>
     </head>
     <body>
-        <?php
-        require_once _DIR_ROOT.'/app/views/Navbar.php';
-        ?>
+    <?php
+    require_once _DIR_ROOT.'/app/views/Navbar.php';
+    ?>
         <main>
             <div class="container">
             <div class="card">

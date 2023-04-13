@@ -6,17 +6,10 @@
 <link rel="stylesheet" href="./TripMana.css"/>
 </head>
 <body>
-<nav class="navbar">
-<div class="logo">
-<img src="../assets/images/logo.png" alt="logo"/>
-VÉ XE PRO
-</div>
-<div class="navbar-left">
-<div class="button">Tôi</div>
-<div class="button">Mã giảm giá</div>
-<div class="button">Liên hệ</div>
-</div>
-</nav>
+
+<?php
+require_once _DIR_ROOT.'/app/views/Navbar.php';
+?>
 <main>
 <div class="container">
 <div class="card">
