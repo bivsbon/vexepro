@@ -1,26 +1,26 @@
 <?php
 class StationService {
-    public function add(array $data) : bool {
+    public static function add(array $data) : bool {
         return Database::add('stations', $data);
     }
 
-    public function get(string $col, string $comparison, mixed $value) : array {
+    public static function get(string $col, string $comparison, mixed $value) : array {
         return Database::get('stations', $col, $comparison, $value);
     }
 
-    public function getAll() : array {
+    public static function getAll() : array {
         return Database::getAll('stations');
     }
 
-    public function update(string $col, string $value, int $id) : bool {
+    public static function update(string $col, string $value, int $id) : bool {
         return Database::update('stations', $col, $value, $id);
     }
 
-    public function delete(int $id) : bool {
+    public static function delete(int $id) : bool {
         return Database::delete('stations', $id);
     }
 
-    public function getProvinces() : array {
+    public static function getProvinces() : array {
         $objArr = Database::getDistinct('stations', 'province');
 
         $provinces = [];

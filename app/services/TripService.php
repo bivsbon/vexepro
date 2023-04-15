@@ -2,40 +2,35 @@
 require_once _DIR_ROOT.'/app/dao/TripDao.php';
 
 class TripService {
-    private TripDao $tripDao;
 
-    public function __construct() {
-        $this->tripDao = new TripDao();
-    }
-
-    public function add(array $data) : bool {
+    public static function add(array $data) : bool {
         return Database::add('trips', $data);
     }
 
-    public function get(string $col, string $comparison, mixed $value) : array {
+    public static function get(string $col, string $comparison, mixed $value) : array {
         return Database::get('trips', $col, $comparison, $value);
     }
 
-    public function getAll() : array {
+    public static function getAll() : array {
         return Database::getAll('trips');
     }
 
-    public function update(string $col, string $value, int $id) : bool {
+    public static function update(string $col, string $value, int $id) : bool {
         return Database::update('trips', $col, $value, $id);
     }
 
-    public function delete(int $id) : bool {
+    public static function delete(int $id) : bool {
         return Database::delete('trips', $id);
     }
 
-    public function seed(int $n) : void {
+    public static function seed(int $n) : void {
     }
 
-    public function search(array $filter) : array {
-        return $this->tripDao->search($filter);
+    public static function search(array $filter) : array {
+        return TripDao::search($filter);
     }
 
-    public function decreaseRemainingSlots(int $id, int $amount) : bool {
+    public static function decreaseRemainingSlots(int $id, int $amount) : bool {
         $trip = Database::get('trips', 'id', '=', $id);
 
         if ($trip == null) return false;
@@ -49,8 +44,8 @@ class TripService {
         return true;
     }
 
-    public function getUnavailableSeats(int $tripID) : array {
-        $objArr = $this->tripDao->getUnavailableSeats($tripID);
+    public static function getUnavailableSeats(int $tripID) : array {
+        $objArr = TripDao::getUnavailableSeats($tripID);
 
         $seats = [];
         foreach ($objArr as $seat) {
