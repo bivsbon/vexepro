@@ -10,6 +10,7 @@ class Manage extends Controller {
     }
 
     public function vehicle() : void {
+        
         $this->render('VehicleMana');
     }
 
