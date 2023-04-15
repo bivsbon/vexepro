@@ -1,6 +1,6 @@
 <?php
 class TripDao {
-    public function search(array $filter) : array {
+    public static function search(array $filter) : array {
         $conn = Connection::get();
 
         $sql = 'SELECT t.id id, start_time, HOUR(est_time) est_hour, MINUTE(est_time) est_minute,'
@@ -20,7 +20,7 @@ class TripDao {
         return $stmt->fetchAll();
     }
 
-    public function getUnavailableSeats($tripID) : array {
+    public static function getUnavailableSeats($tripID) : array {
         $conn = Connection::get();
 
         $sql = "SELECT seat FROM tickets ti"

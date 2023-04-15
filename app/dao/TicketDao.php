@@ -1,6 +1,6 @@
 <?php
 class TicketDao {
-    public function getByUserID(int $uid) : array {
+    public static function getByUserID(int $uid) : array {
         $conn = Connection::get();
 
         $sql = 'SELECT u.id, ti.id id, seat, status, start_time, est_time, remaining_slots, price, plate_num, a.name agency_name,'
@@ -20,7 +20,7 @@ class TicketDao {
         return $stmt->fetchAll();
     }
 
-    public function getUnavailableSeats($tripID) : array {
+    public static function getUnavailableSeats($tripID) : array {
         $conn = Connection::get();
 
         $sql = "SELECT seat FROM tickets ti"

@@ -17,8 +17,8 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
 </div>
 <div class="col-r" id="tab-content">
 </div>
-<?php
-print("<script type='text/javascript'>
+    <?php
+    print("<script type='text/javascript'>
     const tabs = [
         {
             title: 'Danh sách nhà xe',
@@ -33,18 +33,16 @@ print("<script type='text/javascript'>
 <tr>
 <th>Mã nhà xe</th>
 <th> Tên</th>
-</tr>
-\${(function fun(){
-let ct = '';
-for(let i = 0; i<10;i++){
-ct += `<tr>
-<td> Mã nhà xe</td>
-<td> Tên</td>
-</tr>`;
-}
-return ct;
-})()}
-</table>
+</tr>");
+
+    foreach ($agencies as $agency) {
+        print '<tr>
+<td>'.$agency->id.'</td>
+<td>'.$agency->name.'</td>
+</tr>';
+    }
+
+    print("</table>
             </div>
             `
         },
@@ -52,7 +50,7 @@ return ct;
             title: 'Thêm nhà xe',
             id: 'tab-2',
             render: `
-            <form>
+            <form action='/vexepro/agency/add'>
                 <div class='form-wrapper'>
                     <label> Tên nhà xe</label>
                     <input class='form-item' name='name' value=' Tên nhà xe'/>
@@ -65,7 +63,7 @@ return ct;
             title: 'Sửa thông tin nhà xe',
             id: 'tab-3',
             render: `
-            <form>
+            <form action='/vexepro/agency/update'>
                 <div class='form-wrapper'>
                     <label>Nhập id</label>
                     <input class='form-item' name='id'/>
@@ -83,7 +81,7 @@ return ct;
             id: 'tab-4',
             render: `
             <div>
-            <form>
+            <form action='/vexepro/agency/delete'>
                 <div class='form-wrapper'>
                     <label>Nhập id</label>
                     <input class='form-item' name='id'/>
@@ -113,8 +111,8 @@ return ct;
         activeTab = tab.id;
     }
 </script>");
+    ?>
 
-?>
 </div>
 </div>
 </div>

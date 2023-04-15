@@ -1,6 +1,8 @@
 
+
 <?php
 require_once _DIR_ROOT.'/app/services/VehicleTypeService.php';
+
 class VehicleType extends Controller {
     private VehicleTypeService $vehicleTypeService;
     public function __construct() {
