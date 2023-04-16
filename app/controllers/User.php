@@ -1,5 +1,6 @@
 <?php
 require_once _DIR_ROOT.'/app/controllers/Home.php';
+require_once _DIR_ROOT.'/app/services/UserService.php';
 
 class User extends Controller {
     private Home $home;
@@ -20,7 +21,7 @@ class User extends Controller {
             }
             if ($user->role == 'admin') {
                 $_SESSION['adminObj'] = $user;
-                $this->render('UserMana');
+                $this->manage();
             }
 
         } else $this->render('Login');
@@ -46,7 +47,45 @@ class User extends Controller {
     }
 
     public function info() : void {
-        $id = $_SESSION['userOBj']->id;
+
+        $id = $_SESSION['userObj']->id;
+        $tickets = TicketService::get('id', 'equal', $id);
+
+
         $this->render('userinfo');
+    }
+
+    public function manage() : void {
+        $data['users'] = UserService::getAll();
+        header("Cache-Control: no-cache, must-revalidate");
+        $this->render('UserMana', $data);
+    }
+
+    public function add() : void {
+        $fields = Request::getFields();
+
+        UserService::add($fields);
+        $this->manage();
+    }
+
+    public function deactivate() : void {
+        $req = Request::getFields();
+
+        UserService::deactivate($req['id']);
+        $this->manage();
+    }
+
+    public function activate() : void {
+        $req = Request::getFields();
+
+        UserService::activate($req['id']);
+        $this->manage();
+    }
+
+    public function update() : void {
+        $req = Request::getFields();
+
+        UserService::update('name', $req['name'], $req['id']);
+        $this->manage();
     }
 }

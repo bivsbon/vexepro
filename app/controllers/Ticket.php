@@ -1,10 +1,12 @@
 <?php
 require_once _DIR_ROOT.'/app/controllers/Home.php';
+require_once _DIR_ROOT.'/app/services/TripService.php';
+require_once _DIR_ROOT.'/app/services/TicketService.php';
 
 class Ticket extends Controller {
-    private Home $home;
 
     public function book() : void {
+        $home = new Home();
         $data = Request::getFields();
 
         $ticket['user_id'] = $_SESSION['userObj']->id;
@@ -15,7 +17,7 @@ class Ticket extends Controller {
         TicketService::add($ticket);
         TripService::decreaseRemainingSlots($data['trip_id'], 1);
 
-        $this->home->index();
+        $home->index();
     }
 
     public function cancel() : void {

@@ -19,4 +19,12 @@ class UserService {
     public static function delete(int $id) : bool {
         return Database::delete('users', $id);
     }
+
+    public static function deactivate(int $id) : bool {
+        return Database::update('users', 'deactivate_flag', '1', $id);
+    }
+
+    public static function activate(int $id) : bool {
+        return Database::update('users', 'deactivate_flag', '0', $id);
+    }
 }

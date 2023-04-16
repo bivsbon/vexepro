@@ -28,6 +28,7 @@ class Vehicle extends Controller {
         };
     }
 
+
     public function update(): void {
         $data = Request::getFields();
 
@@ -50,5 +51,6 @@ class Vehicle extends Controller {
         VehicleService::update("plate_num", $data['plate_num'], $data['id']);
 
         $this->manage();
+
     }
 }
