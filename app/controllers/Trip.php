@@ -1,4 +1,6 @@
 <?php
+require_once _DIR_ROOT.'/app/services/TripService.php';
+require_once _DIR_ROOT.'/app/services/StationService.php';
 
 class Trip extends Controller {
 
@@ -24,6 +26,31 @@ class Trip extends Controller {
         echo 'Seeding...';
         TripService::seed(intval($n));
         echo '<br>Done!';
+    }
+
+    public function manage() : void {
+        $data['trips'] = TripService::getAll();
+        $this->render('TripMana', $data);
+    }
+    public function add() : void {
+        $fields = Request::getFields();
+
+        TripService::add($fields);
+        $this->manage();
+    }
+
+    public function delete() : void {
+        $req = Request::getFields();
+
+        TripService::delete($req['id']);
+        $this->manage();
+    }
+
+    public function update() : void {
+        $req = Request::getFields();
+
+        TripService::update('name', $req['name'], $req['id']);
+        $this->manage();
     }
 
     public function test() : void {

@@ -39,23 +39,23 @@ print("<script type='text/javascript'>
 <th> Số điện thoại</th>
 <th> Email</th>
 <th> Địa chỉ</th>
-</tr>
-\${(function fun(){
-let ct = '';
-for(let i = 0; i<10;i++){
-ct += `<tr>
-<td>ID</td>
-<td>Mã xe</td>
-<td>Khởi hành</td>
-<td> Dự kiến</td>
-<td> Giá</td>
-<td> Dự kiến</td>
-<td> Giá</td>
-</tr>`;
+<th> Vô hiệu hóa</th>
+</tr>");
+
+foreach ($users as $user) {
+    print '<tr>
+<td>'.$user->id.'</td>
+<td>'.$user->username.'</td>
+<td>'.$user->name.'</td>
+<td>'.$user->age.'</td>
+<td>'.$user->tel.'</td>
+<td>'.$user->email.'</td>
+<td>'.$user->address.'</td>
+<td>'.($user->deactivate_flag == 1 ? "Có" : "Không").'</td>
+</tr>';
 }
-return ct;
-})()}
-</table>
+
+print("</table>
             </div>
             `
         },
@@ -63,7 +63,7 @@ return ct;
             title: 'Thêm người dùng',
             id: 'tab-2',
             render: `
-            <form>
+            <form action='/vexepro/user/add'>
                 <div class='form-wrapper'>
                     <label>Tên đăng nhập</label>
                     <input class='form-item' name='username' value=''/>
@@ -74,23 +74,23 @@ return ct;
                 </div>
                 <div class='form-wrapper'>
                     <label> Họ và tên</label>
-                    <input class='form-item' name='name' value=' Giá chuyến'/>
+                    <input class='form-item' name='name' value=''/>
                 </div>
                 <div class='form-wrapper'>
                     <label> Số điện thoại</label>
-                    <input class='form-item' name='phone' value=' Giá chuyến'/>
+                    <input class='form-item' name='tel' value=''/>
                 </div>
                 <div class='form-wrapper'>
                     <label> Địa chỉ</label>
-                    <input class='form-item' name='address' value=' Giá chuyến'/>
+                    <input class='form-item' name='address' value=''/>
                 </div>
                 <div class='form-wrapper'>
                     <label> Tuổi</label>
-                    <input class='form-item' name='age' type='number' value=' Giá chuyến'/>
+                    <input class='form-item' name='age' type='number' value=''/>
                 </div>
                 <div class='form-wrapper'>
                     <label>Email</label>
-                    <input class='form-item' name='email' type='email' value=' Giá chuyến'/>
+                    <input class='form-item' name='email' type='email' value=''/>
                 </div>
                 <div class='form-wrapper'>
                     <label> Phân quyền</label>
@@ -104,16 +104,16 @@ return ct;
             `
         },
         {
-            title: 'Xóa người dùng',
+            title: 'Vô hiệu hóa người dùng',
             id: 'tab-3',
             render: `
             <div>
-            <form>
+            <form action='/vexepro/user/deactivate'>
                 <div class='form-wrapper'>
                     <label>Nhập id</label>
                     <input class='form-item' name='id'/>
                 </div>
-<button class='button primary-button'>Xóa người dùng</button>
+<button class='button primary-button'>Vô hiệu hóa</button>
             </form>
             `
         }

@@ -6,11 +6,11 @@
     <div class="navbar-left">
         <?php
         if (array_key_exists('adminObj', $_SESSION)) {
-            print("<a class='button' href='/vexepro/manage/customer'>Người dùng</a>
-                    <a class='button' href='/vexepro/manage/agency'>Nhà xe</a>
-                    <a class='button' href='/vexepro/manage/vehicle'>Xe</a>
-                    <a class='button' href='/vexepro/manage/ticket'>Vé</a>
-                    <a class='button' href='/vexepro/manage/trip'>Chuyến</a>
+            print("<a class='button' href='/vexepro/user/manage'>Người dùng</a>
+                    <a class='button' href='/vexepro/agency/manage'>Nhà xe</a>
+                    <a class='button' href='/vexepro/vehicle/manage'>Xe</a>
+                    <a class='button' href='/vexepro/ticket/manage'>Vé</a>
+                    <a class='button' href='/vexepro/trip/manage'>Chuyến</a>
                     <a class='button' href='/vexepro/user/logout'>Đăng xuất</a>
                     ");
         }

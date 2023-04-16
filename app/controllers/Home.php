@@ -1,4 +1,6 @@
 <?php
+require_once _DIR_ROOT.'/app/services/StationService.php';
+require_once _DIR_ROOT.'/app/services/TicketService.php';
 class Home extends Controller {
 
     public function index(): void {
@@ -8,7 +10,7 @@ class Home extends Controller {
         $this->render('Home', $data);
     }
 
-    public function me() {
+    public function me() : void {
         $uid = $_SESSION['userObj']->id;
         $tickets = TicketService::getByUserId($uid);
         $data['tickets'] = $tickets;

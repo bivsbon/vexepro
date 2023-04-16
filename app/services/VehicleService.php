@@ -29,4 +29,8 @@ class VehicleService {
 
         return $plate_numbers;
     }
+
+    public static function getAllWithDetails(): array {
+        return VehicleDao::getAllWithDetails();
+    }
 }

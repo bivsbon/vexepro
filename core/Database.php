@@ -9,7 +9,6 @@ class Database {
         $blanks = implode(', ', array_fill(0, $s, '?'));
 
         $sql = "INSERT INTO ".$table."(".$columns.") values (".$blanks.")";
-        echo $sql;
 
         $stmt = $conn->prepare($sql);
 

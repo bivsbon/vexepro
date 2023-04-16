@@ -36,21 +36,22 @@ print("<script type='text/javascript'>
 <th>Khởi hành</th>
 <th> Dự kiến</th>
 <th> Giá</th>
-</tr>
-\${(function fun(){
-let ct = '';
-for(let i = 0; i<10;i++){
-ct += `<tr>
-<td>ID</td>
-<td>Mã xe</td>
-<td>Khởi hành</td>
-<td> Dự kiến</td>
-<td> Giá</td>
-</tr>`;
-}
-return ct;
-})()}
-</table>
+</tr>");
+
+//foreach ($users as $user) {
+//    print '<tr>
+//<td>'.$user->id.'</td>
+//<td>'.$user->username.'</td>
+//<td>'.$user->name.'</td>
+//<td>'.$user->age.'</td>
+//<td>'.$user->tel.'</td>
+//<td>'.$user->email.'</td>
+//<td>'.$user->address.'</td>
+//<td>'.($user->deactivate_flag == 1 ? "Có" : "Không").'</td>
+//</tr>';
+//}
+
+print("</table>
             </div>
             `
         },
@@ -58,7 +59,7 @@ return ct;
             title: 'Thêm chuyến',
             id: 'tab-2',
             render: `
-            <form>
+            <form action='/vexepro/trip/add'>
                 <div class='form-wrapper'>
                     <label>Chọn điểm đi</label>
                     <select class='form-item' name='start'></select>
@@ -72,8 +73,12 @@ return ct;
                     <select class='form-item' name='vehicle'></select>
                 </div>
                 <div class='form-wrapper'>
-                    <label>Chọn thời gian</label>
-                    <input type='date' class='form-item' name='datetime'/>
+                    <label>Thời gian khởi hành</label>
+                    <input type='datetime-local' class='form-item' name='start_time'/>
+                </div>
+                <div class='form-wrapper'>
+                    <label>Thời gian dự kiến</label>
+                    <input type='time' class='form-item' name='est_time'/>
                 </div>
                 <div class='form-wrapper'>
                     <label>Giá</label>

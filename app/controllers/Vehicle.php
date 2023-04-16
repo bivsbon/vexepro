@@ -13,4 +13,8 @@ class Vehicle extends Controller {
             echo $number.'<br>';
         };
     }
+
+    public function manage() : void {
+
+    }
 }
