@@ -4,6 +4,7 @@
     <title> Quản lý xe </title>
     <link rel="stylesheet" href="/vexepro/app/views/Home.css" />
     <link rel="stylesheet" href="/vexepro/app/views/Me.css" />
+    <link rel="stylesheet" href="/vexepro/app/views/TripMana.css" />
     <link rel="stylesheet" href="/vexepro/app/views/VehicleMana.css" />
 </head>
 
@@ -20,6 +21,14 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
                     <div class="col-r" id="tab-content">
                     </div>
                     <?php
+                        if(array_key_exists('vehicleManage', $error)){
+                            $err = $error["vehicleManage"];
+                            print("<script type=\"text/javascript\">alert('$err')</script>");
+                        }
+                        if(array_key_exists('vehicleUpdate', $error)){
+                            $err = $error["vehicleUpdate"];
+                            print("<script type=\"text/javascript\">alert('$err')</script>");
+                        }
                         print("<script type='text/javascript'>
                             const tabs = [
                                 {
@@ -27,28 +36,17 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
                                     id: 'tab-1',
                                     render: `
                                     <div>
-                        <div style='margin-bottom: 8px'>
-                        <label style='display: inline-block'>Tìm kiếm theo ID: </label>
-                        <input class='form-item' name='trip_id' placeholder='Nhập ID để tìm kiếm'/>
-                        </div>
-                        <table>
-                        <tr>
-                        <th>Mã xe</th>
-                        <th>Tên nhà xe</th>
-                        <th>Loại xe</th>
-                        </tr>
-                        \${(function fun(){
-                        let ct = '';
-                        for(let i = 0; i<10;i++){
-                        ct += `<tr>
-                        <td>ID</td>
-                        <td>Mã xe</td>
-                        <td>Khởi hành</td>
-                        </tr>`;
-                        }
-                        return ct;
-                        })()}
-                        </table>
+                                        <div style='margin-bottom: 8px'>
+                                            <label style='display: inline-block'>Tìm kiếm theo ID: </label>
+                                            <input class='form-item' name='trip_id' placeholder='Nhập ID để tìm kiếm'/>
+                                        </div>
+                                        <table>
+                                            <tr>
+                                                <th>Mã xe</th>
+                                                <th>Tên nhà xe</th>
+                                                <th>Loại xe</th>
+                                            </tr>
+                                        </table>
                                     </div>
                                     `
                                 },
@@ -56,22 +54,70 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
                                     title: 'Thêm xe',
                                     id: 'tab-2',
                                     render: `
-                                    <form>
+                                    <form action='/vexepro/vehicle/add'>
                                         <div class='form-wrapper'>
                                             <label>Chọn nhà xe</label>
-                                            <select class='form-item' name='agency'></select>
+                                            <select class='form-item' name='agency'>
+                                            ");
+                                            foreach($agencyMap as $id => $name){
+                                                print("<option value=\'{$id}\'>{$name}</option>");
+                                            }
+                                            
+                                            print("
+                                            </select>
                                         </div>
                                         <div class='form-wrapper'>
                                             <label>Chọn loại xe</label>
-                                            <select class='form-item' name='type'></select>
+                                            
+                                            <select class='form-item' name='type'>
+                                            ");
+                                            foreach($vehicleTypes as $t){
+                                                print("<option value='$t->id'>$t->type</option>");
+                                            }
+                                            print("
+                                            </select>
                                         </div>
                                         <button class='button primary-button'>Thêm xe</button>
                                     </form>
                                     `
                                 },
                                 {
-                                    title: 'Thêm loại xe',
+                                    title: 'Danh sách loại xe',
                                     id: 'tab-3',
+                                    render: `
+                                    <div>
+                                        <div style='margin-bottom: 8px'>
+                                            <label style='display: inline-block'>Tìm kiếm theo ID: </label>
+                                            <input class='form-item' name='trip_id' placeholder='Nhập ID để tìm kiếm'/>
+                                        </div>
+                                        <table>
+                                            <tr>
+                                                <th>Mã loại</th>
+                                                <th>Tên loại</th>
+                                                <th>Số hàng</th>
+                                                <th>Số tầng</th>
+                                                <th>Số dãy</th>
+                                            </tr>
+                                            ");
+                                            foreach($vehicleTypes as $t){
+                                                print("
+                                                <tr>
+                                                <td>$t->id</td>
+                                                <td>$t->type</td>
+                                                <td>$t->row</td>
+                                                <td>$t->level</td>
+                                                <td>$t->line</td>
+                                                </tr>
+                                                ");
+                                            }
+                                            print("
+                                        </table>
+                                    </div>
+                                    `
+                                },
+                                {
+                                    title: 'Thêm loại xe',
+                                    id: 'tab-4',
                                     render: `
                                     <form action='/vexepro/vehicletype/add'>
                                         <div class='form-wrapper'>
@@ -96,20 +142,36 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
                                 },
                                 {
                                     title: 'Sửa thông tin xe',
-                                    id: 'tab-4',
+                                    id: 'tab-5',
                                     render: `
-                                    <form>
+                                    <form action='/vexepro/vehicle/update'>
                                         <div class='form-wrapper'>
                                             <label>Nhập id</label>
                                             <input class='form-item' name='id'/>
                                         </div>
                                         <div class='form-wrapper'>
                                             <label>Chọn nhà xe</label>
-                                            <select class='form-item' name='agency'></select>
+                                            <select class='form-item' name='agency_id'>
+                                            ");
+                                            foreach($agencyMap as $id => $name){
+                                                print("<option value=\'{$id}\'>{$name}</option>");
+                                            }
+                                            print("
+                                            </select>
                                         </div>
                                         <div class='form-wrapper'>
                                             <label>Chọn loại xe</label>
-                                            <select class='form-item' name='type'></select>
+                                            <select class='form-item' name='type_id'>
+                                            ");
+                                            foreach($vehicleTypes as $t){
+                                                print("<option value='$t->id'>$t->type</option>");
+                                            }
+                                            print("
+                                            </select>
+                                        </div>
+                                        <div class='form-wrapper'>
+                                            <label>Biển số xe</label>
+                                            <input class='form-item' name='plate_num'/>
                                         </div>
                                         <button class='button primary-button'>Sửa chuyến</button>
                                     </form>
@@ -117,7 +179,7 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
                                 },
                                 {
                                     title: 'Xóa xe',
-                                    id: 'tab-5',
+                                    id: 'tab-6',
                                     render: `
                                     <div>
                                     <form>

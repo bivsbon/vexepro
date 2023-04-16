@@ -1,23 +1,21 @@
-
-
 <?php
 require_once _DIR_ROOT.'/app/services/VehicleTypeService.php';
+require_once _DIR_ROOT.'/app/controllers/Vehicle.php';
 
 class VehicleType extends Controller {
-    private VehicleTypeService $vehicleTypeService;
+    private Vehicle $vehicleController;
     public function __construct() {
-        $this->vehicleTypeService = new VehicleTypeService();
+        $this->vehicleController = new Vehicle();
     }
-
     public function add() : void {
+        
         $data = Request::getFields();
         try {
-            $this->vehicleTypeService->add($data);
-            $res = ['res' => 'success'];
+            VehicleTypeService::add($data);
+            $res = ['msg' => 'success'];
         } catch (\Throwable $th) {
-            $res = ['res' => $th];
+            $res = ['msg' => 'failed', 'error' => $th];
         }
-        $this->render('VehicleMana', $res);
-        
+        $this->vehicleController->manage();
     }
 }

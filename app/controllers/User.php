@@ -47,8 +47,6 @@ class User extends Controller {
 
     public function info() : void {
         $id = $_SESSION['userOBj']->id;
-        $tickets = TicketService::get('id', 'equal', $id);
-
         $this->render('userinfo');
     }
 }
