@@ -1,4 +1,6 @@
 <?php
+require_once _DIR_ROOT.'/app/s/Home.php';
+
 class Home extends Controller {
 
     public function index(): void {
