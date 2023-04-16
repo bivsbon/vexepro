@@ -36,16 +36,41 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
                                     id: 'tab-1',
                                     render: `
                                     <div>
+                                    <form action='/vexepro/vehicle/manage' method='POST'>
                                         <div style='margin-bottom: 8px'>
                                             <label style='display: inline-block'>Tìm kiếm theo ID: </label>
-                                            <input class='form-item' name='trip_id' placeholder='Nhập ID để tìm kiếm'/>
+                                            <input class='form-item' name='id' placeholder='Nhập ID để tìm kiếm'/>
                                         </div>
+                                        <button class='button' type='submit'> Tìm kiếm </button>
+                                    </form>
                                         <table>
                                             <tr>
                                                 <th>Mã xe</th>
                                                 <th>Tên nhà xe</th>
                                                 <th>Loại xe</th>
+                                                <th>Số hàng</th>
+                                                <th>Số tầng</th>
+                                                <th>Số dãy</th>
                                             </tr>
+                                            ");
+                                            foreach($vehicles as $vehicle){
+                                                printf("
+                                                <tr>
+                                                <td>%d</td>
+                                                <td>%s</td>
+                                                <td>%s</td>
+                                                <td>%d</td>
+                                                <td>%d</td>
+                                                <td>%d</td>
+                                                </tr>
+                                                ", $vehicle->id, 
+                                                $vehicle->agency_name, 
+                                                $vehicle->type, 
+                                                $vehicle->row, 
+                                                $vehicle->level, 
+                                                $vehicle->line);
+                                            }
+                                            print("
                                         </table>
                                     </div>
                                     `
@@ -176,20 +201,6 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
                                         <button class='button primary-button'>Sửa chuyến</button>
                                     </form>
                                     `
-                                },
-                                {
-                                    title: 'Xóa xe',
-                                    id: 'tab-6',
-                                    render: `
-                                    <div>
-                                    <form>
-                                        <div class='form-wrapper'>
-                                            <label>Nhập id</label>
-                                            <input class='form-item' name='id'/>
-                                        </div>
-                                    <button class='button primary-button'>Xóa xe</button>
-                                    </form>
-                                    `
                                 }
                             ];
                             let activeTab = tabs[0].id;
@@ -217,11 +228,6 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
             </div>
         </div>
     </main>
-    <footer>
-        <div class="company-name">VeXePro</div>
-        <div class="company-desc">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint
-            consectetur cupidatat.</div>
-    </footer>
 </body>
 
 </html>

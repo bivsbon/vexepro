@@ -10,12 +10,13 @@ html {
     background: white;
     padding: 16px;
     border-radius: 8px;
-    min-height: 200px;
+    min-height: calc(100vh - 80px);
     height: max-content;
 }
 .row {
     display: flex;
     gap: 16px;
+    height: 100%;
 }
 .border-r {
     border-right: 1px solid rgba(0,0,0,0.15);

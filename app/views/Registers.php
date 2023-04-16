@@ -1,7 +1,7 @@
 <html>
     <head>
         <title> Đăng ký </title>
-        <link rel="stylesheet" href="./Login.css"/>
+        <link rel="stylesheet" href="/vexepro/app/views/Login.css"/>
     </head>
     <body>
         <div class="container">
@@ -23,8 +23,8 @@
                     <input name="phone" placeholder=" Số điện thoại" class="form-item"/>
                     <label>Mật khẩu</label>
                     <input name="password" placeholder="Nhập mật khẩu" type="password" class="form-item"/>
-                    <button class="primary-button">Đăng ký</button>
-                    <a href="/vexepro/app/views/Login.php" class="button">Đăng nhập</a>
+                    <button class="primary-button button">Đăng ký</button>
+                    <a role="button" style="border: 1px solid rgba(0,0,0,0.15); color: black; text-decoration: none; padding: 4px 8px; display:flex; align-items: center; justify-content: center; border-radius: 8px;" href="/vexepro/app/views/Login.php"> Đăng nhập </a>
                 </form>
             </div>
         </div>

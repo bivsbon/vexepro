@@ -35,6 +35,9 @@ class VehicleService {
     public static function getAllWithDetails(): array {
         return VehicleDao::getAllWithDetails();
     }
+    public static function getAllWithDetailsById(int $id): array {
+        return VehicleDao::getAllWithDetailsById($id);
+    }
 
     public static function getCapacity(int $id): int {
         $shape = VehicleDao::getShape($id);

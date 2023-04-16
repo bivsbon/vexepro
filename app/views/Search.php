@@ -160,9 +160,5 @@
                 </div>
             </div>
         </main>
-        <footer>
-            <div class="company-name">VeXePro</div>
-            <div class="company-desc">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</div>
-        </footer>
     </body>
 </html>

@@ -15,6 +15,20 @@ class VehicleDao
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public static function getAllWithDetailsById(int $id): array {
+        $conn = Connection::get();
+
+        $sql = 'SELECT v.id AS id, plate_num, a.name agency_name, `type`, `row`, `level`, `line` FROM vehicles v '
+            . ' JOIN agencies a ON v.agency_id = a.id'
+            . ' JOIN vehicle_types vt ON v.type_id = vt.id WHERE v.id=?'
+            . ' ORDER BY v.id';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$id]);
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public static function getShape(int $id) : object {
         $conn = Connection::get();
 

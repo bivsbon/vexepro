@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Đăng nhập </title>
+        <title> Đăng nhập</title>
         <link rel="stylesheet" href="/vexepro/app/views/Login.css"/>
     </head>
     <body>
@@ -16,8 +16,8 @@
                     <input name="username" placeholder="Nhập tên người dùng" class="form-item"/>
                     <label>Mật khẩu</label>
                     <input name="password" placeholder="Nhập mật khẩu" type="password" class="form-item"/>
-                    <button type="submit" class="primary-button">Đăng nhập</button>
-                    <a class="button" role="button" href="/vexepro/app/views/Register.php"> Đăng ký </a>
+                    <button type="submit" class=" button primary-button">Đăng nhập</button>
+                    <a role="button" style="border: 1px solid rgba(0,0,0,0.15); color: black; text-decoration: none; padding: 4px 8px; display:flex; align-items: center; justify-content: center; border-radius: 8px;" href="/vexepro/app/views/Register.php"> Đăng ký </a>
                 </form>
             </div>
         </div>

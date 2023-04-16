@@ -1,7 +1,7 @@
 <?php
 require_once _DIR_ROOT.'/app/controllers/Home.php';
-require_once _DIR_ROOT.'/app/services/TripService.php';
 require_once _DIR_ROOT.'/app/services/TicketService.php';
+require_once _DIR_ROOT.'/app/controllers/User.php';
 
 class Ticket extends Controller {
 
@@ -24,35 +24,21 @@ class Ticket extends Controller {
         $ticketID = Request::getFields()['ticket_id'];
 
         TicketService::cancel($ticketID);
+        $home = new Home();
+        $home->me();
     }
 
     public function manage() : void {
-        $data['trips'] = TripService::getAll();
-        $this->render('TripMana', $data);
-    }
-    public function add() : void {
         $fields = Request::getFields();
-        echo $fields['est_time'];
-
-//        TripService::add($fields);
-//        $this->manage();
-    }
-
-    public function delete() : void {
-        $req = Request::getFields();
-
-        TripService::delete($req['id']);
-        $this->manage();
+        if(array_key_exists('id', $fields) && $fields['id'] != '') $data['tickets'] = TicketService::get("id", "=", $fields['id']);
+        else{$data['tickets'] = TicketService::getAll();}
+        $this->render('TicketMana', $data);
     }
 
     public function update() : void {
         $req = Request::getFields();
 
-        TripService::update('name', $req['name'], $req['id']);
+        TicketService::update('status', $req['status'], $req['id']);
         $this->manage();
-    }
-
-    public function test() : void {
-        TripService::decreaseRemainingSlots(98, 1);
     }
 }

@@ -3,7 +3,7 @@
 <title> Tôi </title>
     <link rel="stylesheet" href="/vexepro/app/views/Home.css"/>
     <link rel="stylesheet" href="/vexepro/app/views/Me.css"/>
-    <link rel="stylesheet" href="/vexepro/app/views/UserMana.css"/>
+    <link rel="stylesheet" href="/vexepro/app/views/TripMana.css"/>
 </head>
 <body>
 
@@ -26,10 +26,13 @@ print("<script type='text/javascript'>
             id: 'tab-1',
             render: `
             <div>
+            <form action='/vexepro/user/manage' method='POST'>
 <div style='margin-bottom: 8px'>
 <label style='display: inline-block'>Tìm kiếm theo ID: </label>
-<input class='form-item' name='trip_id' placeholder='Nhập ID để tìm kiếm'/>
+<input class='form-item' name='id' placeholder='Nhập ID để tìm kiếm'/>
+<button type='submit' class='button'>Tìm kiếm</button>
 </div>
+</form>
 <table>
 <tr>
 <th> ID</th>
@@ -144,10 +147,6 @@ print("</table>
 </div>
 </div>
 </main>
-<footer>
-    <div class="company-name">VeXePro</div>
-    <div class="company-desc">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</div>
-</footer>
 </body>
 </html>
 

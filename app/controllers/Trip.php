@@ -30,7 +30,9 @@ class Trip extends Controller {
     }
 
     public function manage() : void {
-        $data['trips'] = TripService::getAllWithDetails();
+        $fields = Request::getFields();
+        if(array_key_exists('id', $fields) && $fields['id'] != '') $data['trips'] = TripService::getAllWithDetailsById($fields['id']);
+        else{$data['trips'] = TripService::getAllWithDetails();}
         $data['stations'] = StationService::getAll();
         $data['vehicles'] = VehicleService::getAllWithDetails();
         $this->render('TripMana', $data);

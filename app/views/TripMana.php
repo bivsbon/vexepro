@@ -25,10 +25,13 @@ print("<script type='text/javascript'>
             id: 'tab-1',
             render: `
             <div>
-<div style='margin-bottom: 8px'>
-<label style='display: inline-block'>Tìm kiếm theo ID: </label>
-<input class='form-item' name='trip_id' placeholder='Nhập ID để tìm kiếm'/>
-</div>
+            <form action='/vexepro/trip/manage' method='POST'>
+            <div style='margin-bottom: 8px'>
+                <label style='display: inline-block'>Tìm kiếm theo ID: </label>
+                <input class='form-item' name='id' placeholder='Nhập ID để tìm kiếm'/>
+            </div>
+            <button class='button' type='submit'> Tìm kiếm </button>
+        </form>
 <table>
 <tr>
 <th>ID</th>
@@ -180,10 +183,6 @@ print("</table>
 </div>
 </div>
 </main>
-<footer>
-    <div class="company-name">VeXePro</div>
-    <div class="company-desc">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</div>
-</footer>
 </body>
 </html>
 

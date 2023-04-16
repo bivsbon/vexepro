@@ -10,7 +10,9 @@ class Agency extends Controller {
     }
 
     public function manage() : void {
-        $data['agencies'] = AgencyService::getAll();
+        $fields = Request::getFields();
+        if(array_key_exists('id', $fields) && $fields['id'] != '') $data['agencies'] = AgencyService::get("id", "=", $fields['id']);
+        else{$data['agencies'] = AgencyService::getAll();}
         $this->render('AgencyMana', $data);
     }
 

@@ -130,7 +130,7 @@ main {
 }
 .show-title {
     font-size: 24px;
-    margin: 8px 0px;
+    margin: 16px 0px;
     font-weight: 600;
 }
 .show-item-title {
@@ -154,6 +154,13 @@ footer {
     background: #1890FF;
     color: white;
 }
+
 .secondary-button {
     background: rgba(0,0,0,0.1);
+}
+
+.company-desc {
+    display: flex;
+    gap:16px;
+    flex-wrap: wrap;
 }

@@ -2,20 +2,26 @@
 require_once _DIR_ROOT.'/app/services/VehicleService.php';
 require_once _DIR_ROOT.'/app/services/AgencyService.php';
 require_once _DIR_ROOT.'/app/services/VehicleTypeService.php';
+require_once _DIR_ROOT.'/app/dao/VehicleDao.php';
 
 class Vehicle extends Controller {
     
     public function manage(): void {
         $agencyMap = [];
-        $vehicles = VehicleService::getAll();
+        $vehicles = [];
+        $fields = Request::getFields();
+        if(array_key_exists('id', $fields) && $fields['id'] != '') $vehicles = VehicleService::getAllWithDetailsById($fields['id']);
+        else{$vehicles = VehicleService::getAllWithDetails();}
         $agencies = AgencyService::getAll();
         $vehicleTypes = VehicleTypeService::getAll();
+
         foreach($agencies as $agency){
             $agencyMap[$agency->id] = $agency->name;
         }
         $this->render('VehicleMana', ["msg" => "success", "vehicles" => $vehicles, "agencyMap" => $agencyMap, "vehicleTypes" => $vehicleTypes, "error" => $this->error]);
         $this->error = [];
     }
+
     public function add() : void {
         $data = Request::getFields();
 
@@ -53,4 +59,12 @@ class Vehicle extends Controller {
         $this->manage();
 
     }
+
+    public function delete() : void {
+        $req = Request::getFields();
+
+        VehicleService::delete($req['id']);
+        $this->manage();
+    }
+
 }

@@ -56,14 +56,18 @@ class User extends Controller {
     }
 
     public function manage() : void {
-        $data['users'] = UserService::getAll();
+        $fields = Request::getFields();
+        if(array_key_exists('id', $fields) && $fields['id'] != '') $data['users'] = UserService::get("id", "=", $fields['id']);
+        else{$data['users'] = UserService::getAll();}
         header("Cache-Control: no-cache, must-revalidate");
         $this->render('UserMana', $data);
     }
 
     public function add() : void {
         $fields = Request::getFields();
-
+        $rawPw = $fields['password'];
+        $hashPw = password_hash($rawPw, PASSWORD_BCRYPT);
+        $fields['password'] = $hashPw;
         UserService::add($fields);
         $this->manage();
     }

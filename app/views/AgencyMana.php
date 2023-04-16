@@ -3,7 +3,7 @@
 <title> Quản lý chuyến </title>
     <link rel="stylesheet" href="/vexepro/app/views/Home.css"/>
     <link rel="stylesheet" href="/vexepro/app/views/Me.css"/>
-    <link rel="stylesheet" href="/vexepro/app/views/AgencyMana.css"/>
+    <link rel="stylesheet" href="/vexepro/app/views/TripMana.css"/>
 </head>
 <body>
 <?php
@@ -25,10 +25,13 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
             id: 'tab-1',
             render: `
             <div>
-<div style='margin-bottom: 8px'>
-<label style='display: inline-block'>Tìm kiếm theo ID: </label>
-<input class='form-item' name='trip_id' placeholder='Nhập ID để tìm kiếm'/>
-</div>
+            <form action='/vexepro/agency/manage' method='POST'>
+            <div style='margin-bottom: 8px'>
+                <label style='display: inline-block'>Tìm kiếm theo ID: </label>
+                <input class='form-item' name='id' placeholder='Nhập ID để tìm kiếm'/>
+            </div>
+            <button class='button' type='submit'> Tìm kiếm </button>
+        </form>
 <table>
 <tr>
 <th>Mã nhà xe</th>
@@ -117,10 +120,6 @@ require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
 </div>
 </div>
 </main>
-<footer>
-    <div class="company-name">VeXePro</div>
-    <div class="company-desc">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</div>
-</footer>
 </body>
 </html>
 

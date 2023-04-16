@@ -22,6 +22,7 @@ class TicketService {
         return Database::update('tickets', 'status', 'canceled', $id);
     }
 
+
     public static function getByUserId(int $uid) : array {
         return TicketDao::getByUserID($uid);
     }

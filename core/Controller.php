@@ -1,4 +1,9 @@
 <?php
+require_once _DIR_ROOT.'/app/services/TripService.php';
+require_once _DIR_ROOT.'/app/services/VehicleService.php';
+require_once _DIR_ROOT.'/app/services/StationService.php';
+require_once _DIR_ROOT.'/app/services/AgencyService.php';
+
 class Controller {
     protected array $error = [];
     public function model($model) {
@@ -11,11 +16,21 @@ class Controller {
         return null;
     }
 
+    private function getFooterData(){
+        $footer['vehicles'] = VehicleService::getAll();
+        $footer['trips'] = TripService::getAllWithDetails();
+        $footer['stations'] = StationService::getAll();
+        $footer['agencies'] = AgencyService::getAll();
+        return $footer;
+    }
+
     public function render($view, $data=[]) {
-        array_push($data, ["error"=> $this->error]);
+        $footer = $this->getFooterData();
+        array_push($data, ["error"=> $this->error, 'footer' => $footer]);
         extract($data);
         if (file_exists(_DIR_ROOT.'/app/views/'.$view.'.php')) {
             require_once _DIR_ROOT.'/app/views/'.$view.'.php';
+            if (!str_ends_with($view, "Mana") && !in_array($view, ["Login", "Register", "Me"])) require_once _DIR_ROOT.'/app/views/'.'Footer'.'.php';
         }
     }
 }

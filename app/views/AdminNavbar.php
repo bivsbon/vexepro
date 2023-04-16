@@ -11,9 +11,10 @@
                     <a class='button' href='/vexepro/station/manage'>Bến xe</a>
                     <a class='button' href='/vexepro/agency/manage'>Nhà xe</a>
                     <a class='button' href='/vexepro/vehicle/manage'>Xe</a>
-                    <a class='button' href='/vexepro/manage/ticket'>Vé</a>
-                    <a class='button' href='/vexepro/manage/trip'>Chuyến</a>
-
+                    <a class='button' href='/vexepro/ticket/manage'>Vé</a>
+                    <a class='button' href='/vexepro/trip/manage'>Chuyến</a>
+                    <a class='button' href='/vexepro/requests/manage'>Yêu cầu</a>
+                    <a class='button' href='/vexepro/complain/manage'>Khiếu nại</a>
                     <a class='button' href='/vexepro/user/logout'>Đăng xuất</a>
                     ");
         }
