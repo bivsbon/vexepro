@@ -1,6 +1,7 @@
 <?php
 require_once _DIR_ROOT.'/app/services/TripService.php';
 require_once _DIR_ROOT.'/app/services/StationService.php';
+require_once _DIR_ROOT.'/app/services/VehicleService.php';
 
 class Trip extends Controller {
 
@@ -29,7 +30,9 @@ class Trip extends Controller {
     }
 
     public function manage() : void {
-        $data['trips'] = TripService::getAll();
+        $data['trips'] = TripService::getAllWithDetails();
+        $data['stations'] = StationService::getAll();
+        $data['vehicles'] = VehicleService::getAllWithDetails();
         $this->render('TripMana', $data);
     }
 
@@ -53,9 +56,5 @@ class Trip extends Controller {
 
         TripService::update('name', $req['name'], $req['id']);
         $this->manage();
-    }
-
-    public function test() : void {
-        TripService::decreaseRemainingSlots(98, 1);
     }
 }

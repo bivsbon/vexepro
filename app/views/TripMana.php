@@ -33,23 +33,24 @@ print("<script type='text/javascript'>
 <tr>
 <th>ID</th>
 <th>Mã xe</th>
-<th>Khởi hành</th>
-<th> Dự kiến</th>
-<th> Giá</th>
+<th>Nơi đi</th>
+<th>Nơi đến</th>
+<th>Thời gian khời hành</th>
+<th>Thời gian dự kiến</th>
+<th>Giá</th>
 </tr>");
 
-//foreach ($users as $user) {
-//    print '<tr>
-//<td>'.$user->id.'</td>
-//<td>'.$user->username.'</td>
-//<td>'.$user->name.'</td>
-//<td>'.$user->age.'</td>
-//<td>'.$user->tel.'</td>
-//<td>'.$user->email.'</td>
-//<td>'.$user->address.'</td>
-//<td>'.($user->deactivate_flag == 1 ? "Có" : "Không").'</td>
-//</tr>';
-//}
+foreach ($trips as $trip) {
+    print '<tr>
+<td>'.$trip->id.'</td>
+<td>'.$trip->vehicle_id.'</td>
+<td>'.$trip->start_station.'</td>
+<td>'.$trip->end_station.'</td>
+<td>'.$trip->start_time.'</td>
+<td>'.$trip->est_time.'</td>
+<td>'.$trip->price.'</td>
+</tr>';
+}
 
 print("</table>
             </div>
@@ -62,15 +63,32 @@ print("</table>
             <form action='/vexepro/trip/add'>
                 <div class='form-wrapper'>
                     <label>Chọn điểm đi</label>
-                    <select class='form-item' name='start'></select>
+                    <select class='form-item' name='station_id_start'>");
+
+                foreach ($stations as $station) {
+                    print("<option value='$station->id'>$station->province - $station->name</option>");
+                }
+
+                print("</select>
                 </div>
                 <div class='form-wrapper'>
                     <label>Chọn điểm đến</label>
-                    <select class='form-item' name='end'></select>
+                    <select class='form-item' name='station_id_end'>");
+
+                    foreach ($stations as $station) {
+                        print("<option value='$station->id'>$station->province - $station->name</option>");
+                    }
+                print("</select>
                 </div>
                 <div class='form-wrapper'>
                     <label>Chọn xe</label>
-                    <select class='form-item' name='vehicle'></select>
+                    <select class='form-item' name='vehicle_id'>");
+
+                foreach ($vehicles as $vehicle) {
+                    print("<option value='$vehicle->id'>$vehicle->id - $vehicle->plate_num - $vehicle->type</option>");
+                }
+
+                print("</select>
                 </div>
                 <div class='form-wrapper'>
                     <label>Thời gian khởi hành</label>
@@ -82,7 +100,7 @@ print("</table>
                 </div>
                 <div class='form-wrapper'>
                     <label>Giá</label>
-                    <input class='form-item' name='price' value=' Giá chuyến'/>
+                    <input class='form-item' name='price'/>
                 </div>
 <button class='button primary-button'>Thêm chuyến</button>
             </form>
@@ -126,7 +144,7 @@ print("</table>
             id: 'tab-4',
             render: `
             <div>
-            <form>
+            <form action='/vexepro/trip/delete'>
                 <div class='form-wrapper'>
                     <label>Nhập id</label>
                     <input class='form-item' name='id'/>
