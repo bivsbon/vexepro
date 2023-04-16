@@ -53,4 +53,8 @@ class TripService {
         }
         return $seats;
     }
+
+    public static function getAllWithDetails() : array {
+        return TripDao::getAllWithDetail();
+    }
  }

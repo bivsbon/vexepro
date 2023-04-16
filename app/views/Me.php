@@ -21,19 +21,18 @@
                 const tickets = [";
             $ownerName = $_SESSION['userObj']->name;
             foreach ($tickets as $ticket) {
-                $id = $ticket['id'];
                 $script .= "
                     {
-                        id: '{$ticket['id']}',
-                        start_place: '{$ticket['start_station']}',
-                        end_place: '{$ticket['end_station']}',
-                        price: '{$ticket['price']}',
-                        start_time: '{$ticket['start_time']}',
-                        est_time: '{$ticket['est_time']}',
+                        id: '$ticket->id',
+                        start_place: '$ticket->start_station',
+                        end_place: '$ticket->end_station',
+                        price: '$ticket->price',
+                        start_time: '$ticket->start_time',
+                        est_time: '$ticket->est_time',
                         owner: '$ownerName',
-                        agency_name: '{$ticket['agency_name']}',
-                        vehicle_type: '{$ticket['vehicle_type']}',
-                        seat: '{$ticket['seat']}'
+                        agency_name: '$ticket->agency_name',
+                        vehicle_type: '$ticket->vehicle_type',
+                        seat: '$ticket->seat'
                     },";
             }
             $username = $_SESSION['userObj']->username;
