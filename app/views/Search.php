@@ -54,35 +54,35 @@
                         <?php
                         foreach ($trips as $trip) {
                             try {
-                                $start_time = DateTime::createFromFormat('H:i:s', $trip['start_time_specific']);
-                                $est_time_interval = new DateInterval('PT'.$trip['est_hour'].'H'.$trip['est_minute'].'M');
+                                $start_time = DateTime::createFromFormat('H:i:s', $trip->start_time_specific);
+                                $est_time_interval = new DateInterval('PT'.$trip->est_hour.'H'.$trip->est_minute.'M');
                                 print("
-        <div id='{$trip['id']}' class='search-item-wrapper'>
+        <div id='$trip->id' class='search-item-wrapper'>
             <div class='search-item'>
             <div class='search-img-wrapper'>
                 <img class='search-img' src='https://static.vexere.com/production/images/1663578798814.jpeg?w=250&h=250'/>
             </div>
             <div class='search-item-content'>
             <div class='search-title'>
-            <div class='agency-name'>{$trip['agency_name']}</div>
-            <div class='price'>".($trip['price']/1000).".000đ</div>
+            <div class='agency-name'>$trip->agency_name</div>
+            <div class='price'>".($trip->price/1000).".000đ</div>
             </div>
-            <div class='vehicle-type'>{$trip['vehicle_type']}</div>
+            <div class='vehicle-type'>$trip->vehicle_type</div>
             <div class='search-desc'>
             <div class='search-places'>
             <div class='start'>
             <div class='start-time'>".$start_time->format('H:i')."</div>
-            <div class='start-place'>{$trip['start_station']}</div>
+            <div class='start-place'>$trip->start_station</div>
             </div>
-            <div class='estimate'>".date('H:i', strtotime($trip['est_time']))."</div>
+            <div class='estimate'>".date('H:i', strtotime($trip->est_time))."</div>
             <div class='end'>
             <div class='end-time'>".$start_time->add($est_time_interval)->format('H:i')."</div>
-            <div class='end-place'>{$trip['end_station']}</div>
+            <div class='end-place'>$trip->end_station</div>
             </div>
             </div>
             <div>
-            <div class='remain'>Còn {$trip['remaining_slots']} chỗ trống</div>
-            <button style='margin-top: 12px' onclick='onShow({$trip['id']}, {$trip['row']}, {$trip['level']}, {$trip['line']})'>Chọn chuyến</button>
+            <div class='remain'>Còn $trip->remaining_slots chỗ trống</div>
+            <button style='margin-top: 12px' onclick='onShow($trip->id, $trip->row, $trip->level, $trip->line)'>Chọn chuyến</button>
             </div>
             </div>
             </div>

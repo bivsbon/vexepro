@@ -17,10 +17,4 @@ class Home extends Controller {
 
         $this->render('Me', $data);
     }
-
-    public function add() : void {
-        $data = Request::getFields();
-
-        StationService::add($data['name']);
-    }
 }

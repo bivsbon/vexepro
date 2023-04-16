@@ -25,4 +25,34 @@ class Ticket extends Controller {
 
         TicketService::cancel($ticketID);
     }
+
+    public function manage() : void {
+        $data['trips'] = TripService::getAll();
+        $this->render('TripMana', $data);
+    }
+    public function add() : void {
+        $fields = Request::getFields();
+        echo $fields['est_time'];
+
+//        TripService::add($fields);
+//        $this->manage();
+    }
+
+    public function delete() : void {
+        $req = Request::getFields();
+
+        TripService::delete($req['id']);
+        $this->manage();
+    }
+
+    public function update() : void {
+        $req = Request::getFields();
+
+        TripService::update('name', $req['name'], $req['id']);
+        $this->manage();
+    }
+
+    public function test() : void {
+        TripService::decreaseRemainingSlots(98, 1);
+    }
 }

@@ -32,8 +32,10 @@ class Trip extends Controller {
         $data['trips'] = TripService::getAll();
         $this->render('TripMana', $data);
     }
+
     public function add() : void {
         $fields = Request::getFields();
+        $fields['remaining_slots'] = VehicleService::getCapacity($fields['vehicle_id']);
 
         TripService::add($fields);
         $this->manage();

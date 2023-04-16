@@ -7,6 +7,7 @@
         <?php
         if (array_key_exists('adminObj', $_SESSION)) {
             print("<a class='button' href='/vexepro/user/manage'>Người dùng</a>
+                    <a class='button' href='/vexepro/station/manage'>Bến xe</a>
                     <a class='button' href='/vexepro/agency/manage'>Nhà xe</a>
                     <a class='button' href='/vexepro/vehicle/manage'>Xe</a>
                     <a class='button' href='/vexepro/ticket/manage'>Vé</a>

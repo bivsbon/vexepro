@@ -12,12 +12,12 @@ class TicketDao {
             .' JOIN agencies a ON v.agency_id = a.id'
             .' JOIN vehicle_types vt ON v.type_id = vt.id'
             .' JOIN stations s1 ON t.station_id_start = s1.id'
-            .' JOIN stations s2 ON t.station_id_end = s2.id '
+            .' JOIN stations s2 ON t.station_id_end = s2.id'
             .' WHERE u.id = ?';
         $stmt = $conn->prepare($sql);
         $stmt->execute([$uid]);
 
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     public static function getUnavailableSeats($tripID) : array {
