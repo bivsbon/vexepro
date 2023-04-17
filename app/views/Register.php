@@ -16,11 +16,13 @@
                     <label> Họ và tên</label>
                     <input name="name" placeholder="Nhập họ và tên" class="form-item"/>
                     <label> Ngày sinh</label>
-                    <input name="age" placeholder=" Ngày sinh" class="form-item"/>
+                    <input name="age" placeholder=" Tuổi" class="form-item"/>
                     <label> Địa chỉ</label>
                     <input name="address" placeholder=" Địa chỉ" class="form-item"/>
                     <label> Số điện thoại</label>
-                    <input name="phone" placeholder=" Số điện thoại" class="form-item"/>
+                    <input name="tel" placeholder=" Số điện thoại" class="form-item"/>
+                    <label>Email</label>
+                    <input name="email" placeholder="Email" class="form-item"/>
                     <label>Mật khẩu</label>
                     <input name="password" placeholder="Nhập mật khẩu" type="password" class="form-item"/>
                     <button class="primary-button button">Đăng ký</button>
