@@ -5,12 +5,7 @@
     </head>
     <body>
         <?php
-        if(array_key_exists("adminObj", $_SESSION)){
-            require_once _DIR_ROOT . '/app/views/AdminNavbar.php';
-        }
-        else{
             require_once _DIR_ROOT . '/app/views/CustomerNavbar.php';
-        }
         ?>
         <main>
             <div class="hero">
