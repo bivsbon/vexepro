@@ -4,7 +4,7 @@ require_once _DIR_ROOT.'/app/services/VehicleService.php';
 require_once _DIR_ROOT.'/app/services/StationService.php';
 require_once _DIR_ROOT.'/app/services/AgencyService.php';
 
-class Controller {
+abstract class Controller {
     protected array $error = [];
     public function model($model) {
         if (file_exists( _DIR_ROOT.'/app/models/'.$model.".php")) {
@@ -16,7 +16,7 @@ class Controller {
         return null;
     }
 
-    private function getFooterData(){
+    private function getFooterData() {
         $footer['vehicles'] = VehicleService::getAll();
         $footer['trips'] = TripService::getAllWithDetails();
         $footer['stations'] = StationService::getAll();

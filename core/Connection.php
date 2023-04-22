@@ -4,7 +4,7 @@ class Connection {
 
     private function __construct(){}
 
-    public static function get() : object {
+    public static function connect() : object {
         global $config;
         $db_config = array_filter($config['database']);
         //Kết nối database
@@ -22,6 +22,13 @@ class Connection {
         ];
         //Câu lệnh kết nối
         self::$conn = new PDO($dsn, $db_config['user'], $db_config['password'], $options);
+        return self::$conn;
+    }
+
+    public static function get() : object {
+        if (self::$conn == null) {
+            self::$conn = @self::connect();
+        }
         return self::$conn;
     }
 }

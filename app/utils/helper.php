@@ -6,7 +6,7 @@ function seatToInt(string $seat, int $row, int $level, int $line) : int {
 
 function intToSeat(int $num, int $row, int $level, int $line) : string {
     $elem1 = floor(($num-1) / ($line*$level));
-    $elem2 = floor(($num-1) / $line / $level);
+    $elem2 = floor((($num-1) % ($line*$level)) / $line);
     $elem3 = ($num-1) % $line;
 
     return chr(65+$elem1).($elem2+1).($elem3+1);

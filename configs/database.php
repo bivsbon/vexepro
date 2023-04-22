@@ -1,7 +1,7 @@
 <?php
 $config['database'] = [
     'host' => 'localhost',
-    'user' => 'lee',
-    'password' => '5vt%NeQ4b,iR#T?',
+    'user' => 'root',
+    'password' => 'admin1',
     'db' => 'vexepro'
 ];
