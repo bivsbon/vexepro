@@ -9,26 +9,136 @@ require_once '../../core/MySqlBuilder.php';
 require_once '../../app/services/TripService.php';
 require_once 'helper.php';
 
+function get_ids(string $table_name) : array {
+    $objs = Database::getAll($table_name);
+    $ids = [];
 
-function trip_seed(int $n) : void
-{
-    $n = 30;
-    $station_ids = [];
-    $station_id_low = 1;
-    $station_id_high = 6;
-    $vehicle_id_low = 1;
-    $vehicle_id_high = 17;
-    $slots = [1, 30, 30, 22];
-
-    for ($i = $station_id_low; $i <= $station_id_high; $i++) {
-        $station_ids[] = $i;
+    foreach ($objs as $obj) {
+        $ids[] = $obj->id;
     }
+
+    return $ids;
+}
+
+function genArr(int $n) : array {
+    $arr = [];
+    for ($i = 1; $i <= $n; $i++) {
+        $arr[] = $i;
+    }
+    return $arr;
+}
+
+function random_phone_number() : string {
+    $tel = '09';
+    for ($i = 0; $i < 8; $i++) {
+        $tel .= rand(0, 9);
+    }
+    return $tel;
+}
+
+function random_bank_number() : string {
+    $number = '';
+    for ($i = 0; $i < 10; $i++) {
+        $number .= rand(0, 9);
+    }
+    return $number;
+}
+
+function random_plate_number() : string {
+    $prefix = rand(29, 33) . chr(rand(65, 70));
+    return $prefix . '-' . rand(100, 999) . '.' . rand(10, 99);
+}
+
+function reset_AI(string $table_name) : void {
+    $conn = Connection::get();
+
+    $sql = "ALTER TABLE ".$table_name." AUTO_INCREMENT = 1";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+}
+
+function reset_all_AI() : void {
+    reset_AI('agencies');
+    reset_AI('stations');
+    reset_AI('vehicle_types');
+    reset_AI('vehicles');
+    reset_AI('users');
+    reset_AI('trips');
+    reset_AI('tickets');
+}
+
+function agency_seed() : void {
+    $conn = Connection::get();
+
+    $sql = "INSERT INTO agencies(name, tel, bank_number, bank_name) VALUES 
+         ('Nhà xe Xuân Truyền', '".random_phone_number()."', '".random_bank_number()."', 'BIDV'),
+         ('Nhà xe Hưng Lonng', '".random_phone_number()."', '".random_bank_number()."', 'BIDV'),
+         ('Nhà xe Cố Hương', '".random_phone_number()."', '".random_bank_number()."', 'VPBank')";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+}
+
+function station_seed() : void {
+    $conn = Connection::get();
+
+    $sql = "INSERT INTO stations(`name`, province) VALUES 
+         ('Bến xe Nước Ngầm', 'Hà Nội'), 
+         ('Bến xe Giáp Bát', 'Hà Nội'), 
+         ('Bến xe trung tâm Đà Nẵng', 'Đà Nẵng'), 
+         ('Bến xe Đức Long', 'Đà Nẵng'), 
+         ('Bến xe Miền Tây', 'TP. Hồ Chí Minh'), 
+         ('Bến xe Miền Đông', 'TP. Hồ Chí Minh')";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+}
+
+function vehicle_type_seed() : void {
+    $conn = Connection::get();
+
+    $sql = "INSERT INTO vehicle_types(`type`, `row`, `level`, `line`) VALUES 
+          ('Giường nằm 30 chỗ',3,2,5),
+          ('Limousine giường phòng 30 chỗ',3,2,5),
+          ('Limousine 20 Giường Vip (có WC)',2,2,5)";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+}
+
+function vehicle_seed() : void {
+    for ($agency_id = 1; $agency_id <= 3; $agency_id++) {
+        for ($vehicle_type = 1; $vehicle_type <= 3; $vehicle_type++) {
+            $nVehicles = rand(1, 4);
+            for ($i = 0; $i < $nVehicles; $i++) {
+                $data = [];
+                $data['agency_id'] = $agency_id;
+                $data['type_id'] = $vehicle_type;
+                $data['plate_num'] = random_plate_number();
+                Database::add('vehicles', $data);
+            }
+        }
+    }
+}
+
+function trip_seed(int $n) : void {
+    $conn = Connection::get();
+
+    $sql = "SELECT COUNT(*) FROM vehicles";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    $nVehicles = $stmt->fetch(PDO::FETCH_NUM)[0];
+    $slots = [1, 30, 30, 20];
+    $station_ids = get_ids('stations');
 
     for ($i = 0; $i < $n; $i++) {
         shuffle($station_ids);
         $station_id_start = $station_ids[0];
         $station_id_end = $station_ids[1];
-        $vehicleID = rand($vehicle_id_low, $vehicle_id_high);
+        $vehicleID = rand(1, $nVehicles);
 
         $vehicle = Database::get('vehicles', 'id', '=', $vehicleID)[0];
 
@@ -36,24 +146,24 @@ function trip_seed(int $n) : void
         $data['station_id_start'] = $station_id_start;
         $data['station_id_end'] = $station_id_end;
         $data['vehicle_id'] = $vehicleID;
-        $data['start_time'] = '2023:04:' . rand(15, 30) . ' ' . rand(0, 23) . ':' . (rand(0, 1) * 30) . ':00';
+        $data['start_time'] = '2023:05:' . rand(1, 30) . ' ' . rand(0, 23) . ':' . (rand(0, 1) * 30) . ':00';
         $data['est_time'] = rand(1, 5) . ':' . (rand(0, 1) * 30) . ':00';
         $data['price'] = rand(20, 50) * 10000;
         Database::add('trips', $data);
     }
 }
 
-function user_seed(array $names, array $addresses) : void {
+function user_seed() : void {
+    $names = ['loc', 'duc', 'anh', 'an', 'long', 'hung', 'phuong', 'nhi', 'huyen', 'trang'];
+    $addresses = ['Quảng Bình', 'Hà Tĩnh', 'Thanh Hóa', 'Nam Đinh', 'Đà Nẵng', 'Hà Nội', 'Huế', 'Nha Trang', 'Hải Phòng'];
+
     foreach ($names as $name) {
         $data = [];
         $data['username'] = $name;
         $data['password'] = password_hash('123', PASSWORD_BCRYPT);
         $data['name'] = ucfirst($name);
-        $data['age'] = rand(20, 35);
-        $data['tel'] = '09';
-        for ($i = 0; $i < 8; $i++) {
-            $data['tel'] .= rand(0, 9);
-        }
+        $data['dob'] = rand(1990, 2005).':'.rand(1, 12).':'.rand(1, 28);
+        $data['tel'] = random_phone_number();
         $data['email'] = $name . '@email.com';
         shuffle($addresses);
         $data['address'] = $addresses[0];
@@ -65,7 +175,7 @@ function user_seed(array $names, array $addresses) : void {
 
 function ticket_seed($nTrips) : void {
     $tripService = new TripService();
-    $conn = Connection::getInstance()->getConnection();
+    $conn = Connection::get();
     $trips = Database::getAll('trips');
     shuffle($trips);
     $userArr = genArr(10);
@@ -99,21 +209,29 @@ function ticket_seed($nTrips) : void {
     }
 }
 
-function genArr(int $n) : array {
-    $arr = [];
-    for ($i = 0; $i < $n; $i++) {
-        $arr[] = $i+1;
-    }
-    return $arr;
-}
+function seed_all() : void {
+    $nTrips = 200;
 
-$names = ['loc', 'duc', 'anh', 'an', 'long', 'hung', 'phuong', 'nhi', 'huyen', 'trang'];
-$addresses = ['Quảng Bình', 'Hà Tĩnh', 'Thanh Hóa', 'Nam Đinh', 'Đà Nẵng', 'Hà Nội', 'Huế', 'Nha Trang', 'Hải Phòng'];
+    reset_all_AI();
+
+    agency_seed();
+    station_seed();
+    vehicle_type_seed();
+    vehicle_seed();
+    user_seed();
+    trip_seed($nTrips);
+    ticket_seed($nTrips);
+}
 
 echo 'Seeding...    ';
 
-//user_seed($names, $addresses);
+//user_seed();
 //trip_seed(30);
-ticket_seed(20);
+//ticket_seed(20);
+
+//vehicle_seed();
+//trip_seed(10);
+seed_all();
 
 echo 'Done!';
+
