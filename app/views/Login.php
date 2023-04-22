@@ -17,7 +17,7 @@
                     <label>Mật khẩu</label>
                     <input name="password" placeholder="Nhập mật khẩu" type="password" class="form-item"/>
                     <button type="submit" class=" button primary-button">Đăng nhập</button>
-                    <a role="button" style="border: 1px solid rgba(0,0,0,0.15); color: black; text-decoration: none; padding: 4px 8px; display:flex; align-items: center; justify-content: center; border-radius: 8px;" href="/vexepro/app/views/Register.php"> Đăng ký </a>
+                    <a role="button" type="button" style="border: 1px solid rgba(0,0,0,0.15); color: black; text-decoration: none; padding: 4px 8px; display:flex; align-items: center; justify-content: center; border-radius: 8px;" href="/vexepro/user/register"> Đăng ký </a>
                 </form>
             </div>
         </div>

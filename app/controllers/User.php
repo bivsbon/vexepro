@@ -27,6 +27,10 @@ class User extends Controller {
         } else $this->render('Login');
     }
 
+    public function register(): void {
+        $this->render('Registers');
+    }
+
     public function signup() : void {
         $data = Request::getFields();
         $data['role'] = 'customer';
@@ -36,8 +40,8 @@ class User extends Controller {
             $userService = new UserService();
             $userService->add($data);
 
-            $this->home->index();
-        } else $this->render('signup'); // username exists
+            $this->render('Login');
+        } else $this->render('Registers', ["error" => "Username exists"]); // username exists
     }
 
     public function logout() : void {

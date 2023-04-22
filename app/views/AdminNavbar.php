@@ -20,7 +20,7 @@
         }
         else {
             print('<a class="button primary-button" href="/vexepro/app/views/Login.php">Đăng nhập</a>
-                <a class="button secondary-button" href="/vexepro/app/views/Register.php">Đăng ký</a>');
+                <a class="button secondary-button" href="/vexepro/user/register">Đăng ký</a>');
         }
         ?>
     </div>

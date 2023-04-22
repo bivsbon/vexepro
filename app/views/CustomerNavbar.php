@@ -8,10 +8,10 @@
         if (array_key_exists('userObj', $_SESSION)) {
             print("<a class='button' href='/vexepro/home/me'>Tôi</a>
             <a class='button' href='/vexepro/complain/index'>Liên hệ</a>
-                    ");
+            ");
         } else {
             print('<a class="button primary-button" href="/vexepro/app/views/Login.php">Đăng nhập</a>
-                <a class="button secondary-button" href="/vexepro/app/views/Register.php">Đăng ký</a>');
+                <a class="button secondary-button" href="/vexepro/user/register">Đăng ký</a>');
         }
         ?>
     </div>

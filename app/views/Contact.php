@@ -15,7 +15,7 @@
                 }
                 $message = ""
             ?>
-            <div class="container">
+            <div class="container" style="display: flex; justify-content: center">
                 <div class="card">
                     <?php   
                         $complain_subjects = ["account" => "Tài khoản", "agency" => "Về nhà xe", "system" => "Trang Web"];

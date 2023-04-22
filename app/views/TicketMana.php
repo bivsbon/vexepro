@@ -33,6 +33,7 @@
                                         </div>
                                         <button class='button' type='submit'> Tìm kiếm </button>
                                     </form>
+                                    <div>
                                     <table>
                                     <tr>
                                     <th> Mã vé</th>
@@ -53,6 +54,7 @@
                                     }
                                     print("
                                     </table>
+                                    </div>
                                     </div>
                                     `
                                 },
