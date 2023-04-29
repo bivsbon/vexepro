@@ -17,13 +17,15 @@ class Ticket extends Controller {
         TicketService::add($ticket);
         TripService::decreaseRemainingSlots($data['trip_id'], 1);
 
-        $home->index();
+        $home->me();
     }
 
     public function cancel() : void {
+        $data = Request::getFields();
         $ticketID = Request::getFields()['ticket_id'];
 
         TicketService::cancel($ticketID);
+        TripService::increaseRemainingSlots($data['trip_id'], 1);
         $home = new Home();
         $home->me();
     }

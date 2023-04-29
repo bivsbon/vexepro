@@ -28,7 +28,7 @@ class User extends Controller {
     }
 
     public function register(): void {
-        $this->render('Registers');
+        $this->render('Register');
     }
 
     public function signup() : void {
@@ -41,7 +41,7 @@ class User extends Controller {
             $userService->add($data);
 
             $this->render('Login');
-        } else $this->render('Registers', ["error" => "Username exists"]); // username exists
+        } else $this->render('Register', ["error" => "Tên đăng nhập đã tồn tại"]); // username exists
     }
 
     public function logout() : void {

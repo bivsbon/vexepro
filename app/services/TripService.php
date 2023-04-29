@@ -44,6 +44,20 @@ class TripService {
         return true;
     }
 
+    public static function increaseRemainingSlots(int $id, int $amount) : bool {
+        $trip = Database::get('trips', 'id', '=', $id);
+
+        if ($trip == null) return false;
+        else $trip = $trip[0];
+        $capacity = VehicleService::getCapacity($trip->vehicle_id);
+        if ($trip->remaining_slots + $amount <= $capacity)
+            Database::update('trips', 'remaining_slots', $trip->remaining_slots+$amount, $id);
+        else
+            return false;
+
+        return true;
+    }
+
     public static function getUnavailableSeats(int $tripID) : array {
         $objArr = TripDao::getUnavailableSeats($tripID);
 

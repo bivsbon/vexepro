@@ -3,7 +3,7 @@ class TicketDao {
     public static function getByUserID(int $uid) : array {
         $conn = Connection::get();
 
-        $sql = 'SELECT u.id, ti.id id, seat, status, start_time, est_time, remaining_slots, price, plate_num, a.name agency_name,'
+        $sql = 'SELECT u.id, ti.id id, seat, status, start_time, trip_id, est_time, remaining_slots, price, plate_num, a.name agency_name,'
             .'vt.`type` vehicle_type, `row`, `level`, s1.`name` start_station, s1.province start_province,'
             .' s2.`name` end_station, s2.province end_province FROM tickets ti'
             .' JOIN users u ON ti.user_id = u.id'

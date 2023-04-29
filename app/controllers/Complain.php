@@ -3,8 +3,18 @@ require_once _DIR_ROOT.'/app/services/ComplainService.php';
 
 class Complain extends Controller {
     
-    public function index(): void {
-        $this->render('Contact', ["message" => ""]);
+    public function index($message = ""): void {
+        $data['complains'] = ComplainService::get("user_id", "=", $_SESSION['userObj']->id);
+        $data['message'] = $message;
+        $this->render('Contact', $data);
+    }
+
+    public function detail(): void {
+        $fields = Request::getFields();
+        $data['complains'] = ComplainService::get("user_id", "=", $_SESSION['userObj']->id);
+        $complain = ComplainService::get("id", "=", $fields['id']);
+        if(count($complain) > 0) $data['complain'] = $complain[0];
+        $this->render('Contact', $data);
     }
 
     public function update() : void {
@@ -19,10 +29,10 @@ class Complain extends Controller {
         $this->render('ComplainMana', $data);
     }
     public function add_c() : void {
-        $data = Request::getFields();
+        $fields = Request::getFields();
         try {
-            ComplainService::add($data);
-            $this->render('Contact', ["message" => "Tạo thành công"]);
+            ComplainService::add($fields);
+            $this->index("Thành công");
             $this->error = [];
         }catch(\Throwable $th){
             $this->error['complainAdd'] = $th;
@@ -30,5 +40,6 @@ class Complain extends Controller {
         }
       
     }
+
 
 }

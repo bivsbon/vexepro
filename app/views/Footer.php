@@ -3,7 +3,8 @@
             <div class="trips" style="padding: 16px 16px">
                 <div style="font-size:16; font-weight: bold; margin-bottom: 8px; text-align:left">Danh sách chuyến</div>
                 <?php
-                    foreach($footer['trips'] as $trip){
+                    foreach($footer['trips'] as $index => $trip){
+                        if($index <= 10)
                         printf("<div style='text-align:left; margin: 4px 0px'>Chuyến <b>%s</b> đi <b>%s</b></div>", $trip->start_station, $trip->end_station);
                     }
                 ?>
@@ -11,7 +12,8 @@
             <div class="stations" style="padding: 16px 16px">
                 <div style="font-size:16; font-weight: bold; margin-bottom: 8px; text-align:left">Danh sách bến</div>
                 <?php
-                    foreach($footer['stations'] as $station){
+                    foreach($footer['stations'] as $index => $station){
+                        if($index <= 10)
                         printf("<div style='text-align:left; margin: 4px 0px'>%s</div>", $station->name);
                     }
                 ?>
@@ -19,7 +21,8 @@
             <div class="agencies" style="padding: 16px 16px">
                 <div style="font-size:16; font-weight: bold; margin-bottom: 8px; text-align:left">Danh sách nhà xe</div>
                 <?php
-                    foreach($footer['agencies'] as $agency){
+                    foreach($footer['agencies'] as $index => $agency){
+                        if($index <= 10)
                         printf("<div style='text-align:left; margin: 4px 0px'>Nhà xe %s</div>", $agency->name);
                     }
                 ?>

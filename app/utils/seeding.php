@@ -1,13 +1,13 @@
 <?php
 define('_DIR_ROOT', 'C:/xampp/htdocs/vexepro');
-require_once '../../configs/database.php';
-require_once '../../core/Database.php';
-require_once '../../core/Connection.php';
-require_once '../../core/SqlClauses.php';
-require_once '../../core/BaseSqlBuilder.php';
-require_once '../../core/MySqlBuilder.php';
-require_once '../../app/services/TripService.php';
-require_once 'helper.php';
+require_once _DIR_ROOT. '/configs/database.php';
+require_once _DIR_ROOT. '/core/Database.php';
+require_once _DIR_ROOT. '/core/Connection.php';
+require_once _DIR_ROOT. '/core/SqlClauses.php';
+require_once _DIR_ROOT. '/core/BaseSqlBuilder.php';
+require_once _DIR_ROOT. '/core/MySqlBuilder.php';
+require_once _DIR_ROOT. '/app/services/TripService.php';
+require_once _DIR_ROOT. '/app/utils/helper.php';
 
 function get_ids(string $table_name) : array {
     $objs = Database::getAll($table_name);

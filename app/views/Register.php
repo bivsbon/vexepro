@@ -21,7 +21,7 @@
                     <label> Họ và tên</label>
                     <input name="name" placeholder="Nhập họ và tên" class="form-item"/>
                     <label> Ngày sinh</label>
-                    <input name="age" placeholder=" Tuổi" class="form-item"/>
+                    <input name="dob" placeholder="Tuổi" type="date" class="form-item"/>
                     <label> Địa chỉ</label>
                     <input name="address" placeholder=" Địa chỉ" class="form-item"/>
                     <label> Số điện thoại</label>

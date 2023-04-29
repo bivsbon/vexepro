@@ -7,7 +7,7 @@
         <?php
         if (array_key_exists('userObj', $_SESSION)) {
             print("<a class='button' href='/vexepro/home/me'>Tôi</a>
-            <a class='button' href='/vexepro/complain/index'>Liên hệ</a>
+            <a class='button' href='/vexepro/complain/index'>Hỗ trợ</a>
             ");
         } else {
             print('<a class="button primary-button" href="/vexepro/app/views/Login.php">Đăng nhập</a>

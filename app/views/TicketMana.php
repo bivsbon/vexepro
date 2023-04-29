@@ -33,7 +33,7 @@
                                         </div>
                                         <button class='button' type='submit'> Tìm kiếm </button>
                                     </form>
-                                    <div>
+                                    <div class='table-wrapper'>
                                     <table>
                                     <tr>
                                     <th> Mã vé</th>

@@ -2,6 +2,7 @@
 require_once _DIR_ROOT.'/app/services/TripService.php';
 require_once _DIR_ROOT.'/app/services/StationService.php';
 require_once _DIR_ROOT.'/app/services/VehicleService.php';
+require_once _DIR_ROOT.'/app/services/TicketService.php';
 
 class Trip extends Controller {
 
@@ -17,8 +18,14 @@ class Trip extends Controller {
         if (!array_key_exists('price_high', $filter) || $filter['price_high'] == '') $filter['price_high'] = 10000000;
         if (!array_key_exists('start_date', $filter) || $filter['start_date'] == '') $filter['start_date'] = $dateNow;
 
-        $data['trips'] = TripService::search($filter);
+        $trips = TripService::search($filter);
+
+        foreach($trips as $trip){
+            $tickets = TicketDao::getUnavailableSeats($trip ->id);
+            $trip->tickets = $tickets;
+        }
         $data['provinces'] = StationService::getProvinces();
+        $data['trips'] = $trips;
 
         $this->render('Search', $data);
     }

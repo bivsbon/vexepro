@@ -19,7 +19,7 @@ class TicketService {
     }
 
     public static function cancel(int $id) : bool {
-        return Database::update('tickets', 'status', 'canceled', $id);
+        return Database::delete('tickets',  $id);
     }
 
 

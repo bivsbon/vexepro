@@ -10,13 +10,10 @@ html {
     background: white;
     padding: 16px;
     border-radius: 8px;
-    min-height: calc(100vh - 80px);
-    height: max-content;
 }
 .row {
     display: flex;
     gap: 16px;
-    height: 100%;
 }
 .border-r {
     border-right: 1px solid rgba(0,0,0,0.15);
@@ -27,12 +24,10 @@ html {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    height: 100%;
     flex: 0 0 20%;
 }
 .col-r {
     flex: 0 0 80%;
-    height: 100%;
     padding-right: 16px;
 }
 .tab-item {

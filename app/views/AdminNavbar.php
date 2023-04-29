@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <a href="/vexepro" style="text-decoration: none; color: black" class="logo">
+    <a href="/vexepro/user/manage" style="text-decoration: none; color: black" class="logo">
         <img src="/vexepro/app/assets/images/logo.png" alt="logo"/>
         VÉ XE PRO
     </a>
