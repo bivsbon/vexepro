@@ -66,31 +66,6 @@
                     ?>
                 </div>
             </div>
-            <div class="container">
-                <div class="show-title"> Khuyến mãi </div>
-                <div class="show-wrapper">
-                    <?php
-                    $arrData = [
-                        ["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-                        ["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-                        ["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-                        ["img" => "https://storage.googleapis.com/vex-config/cms-tool/destination/images/5/img_hero.png?v1" , "title" => "Sài Gòn - Nha Trang", "price" => "200.000"],
-                    ];
-                    foreach($arrData as $key => $val){
-                        print("<div class='show-item'>
-                          <div class='show-img'>
-                          <img src={$val["img"]} alt='car'/>
-                          </div>
-                          <div class='show-desc'>
-                          <div class='show-item-title'>{$val["title"]}</div>
-                          <div>Chỉ từ {$val["price"]}đ</div>
-                          </div>
-                          </div>
-                          ");
-                    }
-                    ?>
-                </div>
-            </div>
         </main>
     </body>
 </html>

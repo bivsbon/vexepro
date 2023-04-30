@@ -67,7 +67,6 @@
                 </div>
                 <div style="<?php echo isset($complain) ? 'display: flex; flex-direction: column; gap:8px; width: 100%' : 'display: none' ?>">
                     <?php
-                    $messages = ["haha", "hihi"];
                     if (isset($complain)) {
                     ?>
                         <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">
@@ -78,14 +77,20 @@
                         <div style="width: 100%; min-height: 200px; border: 1px solid rgba(0,0,0,0.15); padding: 16px">
                             <?php
                             foreach ($messages as $m) {
-                                printf("<div style=\"text-align:right\">%s</div>", $m);
+                                printf("<div style=\"text-align:right\">%s</div>", $m->content);
                             }
                             ?>
                         </div>
+
                         <div>
-                            <textarea style="width: 100%; padding: 4px 8px; resize: vertical" autofocus="true" rows="4" placeholder="Nhập tin nhắn vào đây"></textarea>
+                            <form action="/vexepro/complain/add_m" method="POST">
+                                <input style="visibility: hidden; display: none" name='user_id' value='<?php echo $_SESSION['userObj']->id ?>' />
+                                <input style="visibility: hidden; display: none" name='complain_id' value='<?php echo $complain->id ?>' />
+                                <textarea style="width: 100%; padding: 4px 8px; resize: vertical" autofocus="true" rows="4" name="content" placeholder="Nhập tin nhắn vào đây"></textarea>
+                                <button style="max-width: max-content; padding: 8px 16px; margin-top: 8px">Gửi</button>
+                            </form>
                         </div>
-                        <button style="max-width: max-content; padding: 8px">Gửi</button>
+
                 </div>
             <?php } ?>
             </div>

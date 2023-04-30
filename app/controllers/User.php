@@ -1,14 +1,18 @@
 <?php
-require_once _DIR_ROOT.'/app/controllers/Home.php';
-require_once _DIR_ROOT.'/app/services/UserService.php';
+require_once _DIR_ROOT . '/app/controllers/Home.php';
+require_once _DIR_ROOT . '/app/services/UserService.php';
+require_once _DIR_ROOT . '/app/dao/UserDao.php';
 
-class User extends Controller {
+class User extends Controller
+{
     private Home $home;
-    public function __construct() {
+    public function __construct()
+    {
         $this->home = new Home();
     }
 
-    public function login() : void {
+    public function login(): void
+    {
         $data = Request::getFields();
         $user = UserService::get('username', 'like', $data['username'])[0];
 
@@ -23,15 +27,16 @@ class User extends Controller {
                 $_SESSION['adminObj'] = $user;
                 $this->manage();
             }
-
         } else $this->render('Login');
     }
 
-    public function register(): void {
+    public function register(): void
+    {
         $this->render('Register');
     }
 
-    public function signup() : void {
+    public function signup(): void
+    {
         $data = Request::getFields();
         $data['role'] = 'customer';
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
@@ -44,56 +49,61 @@ class User extends Controller {
         } else $this->render('Register', ["error" => "Tên đăng nhập đã tồn tại"]); // username exists
     }
 
-    public function logout() : void {
+    public function logout(): void
+    {
         unset($_SESSION['userObj']);
         unset($_SESSION['adminObj']);
-        $this->home->index();
+        $this->redirect("/vexepro/home/index");
     }
 
-    public function info() : void {
+    public function info(): void
+    {
 
         $id = $_SESSION['userObj']->id;
         $tickets = TicketService::get('id', 'equal', $id);
-
-
         $this->render('userinfo');
     }
 
-    public function manage() : void {
+    public function manage(): void
+    {
         $fields = Request::getFields();
-        if(array_key_exists('id', $fields) && $fields['id'] != '') $data['users'] = UserService::get("id", "=", $fields['id']);
-        else{$data['users'] = UserService::getAll();}
-        header("Cache-Control: no-cache, must-revalidate");
+        $search =  (array_key_exists('search', $fields) && $fields['search'] != '') ? $fields['search'] : '';
+        $status =  (array_key_exists('status', $fields) && $fields['status'] != '') ? $fields['status'] : '';
+        $data['users'] = UserDao::search($search, $status);
         $this->render('UserMana', $data);
     }
 
-    public function add() : void {
+    public function add(): void
+    {
         $fields = Request::getFields();
         $rawPw = $fields['password'];
         $hashPw = password_hash($rawPw, PASSWORD_BCRYPT);
         $fields['password'] = $hashPw;
         UserService::add($fields);
-        $this->manage();
+        $this->redirect("/vexepro/user/manage");
     }
 
-    public function deactivate() : void {
+    public function deactivate(): void
+    {
         $req = Request::getFields();
 
         UserService::deactivate($req['id']);
-        $this->manage();
+        $this->redirect("/vexepro/user/manage");
     }
 
-    public function activate() : void {
+    public function activate(): void
+    {
         $req = Request::getFields();
 
         UserService::activate($req['id']);
-        $this->manage();
+        $this->redirect("/vexepro/user/manage");
     }
 
-    public function update() : void {
+    public function update(): void
+    {
         $req = Request::getFields();
 
         UserService::update('name', $req['name'], $req['id']);
-        $this->manage();
+        $this->redirect("/vexepro/user/manage");
     }
 }

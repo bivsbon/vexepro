@@ -121,28 +121,28 @@
                                     let ct = '';
                                     tickets.filter(item => item.status === 'active').forEach(item => {
                                         ct += `<div class='ticket-item-wrapper'>
-                                                <div class='ticket-id' style='margin-bottom: 8px'>No.\${item.id} <span style='font-size: 12px;padding: 2px 4px; background:green; text-transform: uppercase; border-radius:5px; color:white'>\${ticket_status[item.status]}</span></div>    
+                                                <div class='ticket-id' style='margin-bottom: 8px'>No.${item.id} <span style='font-size: 12px;padding: 2px 4px; background:green; text-transform: uppercase; border-radius:5px; color:white'>${ticket_status[item.status]}</span></div>    
                                                 <div class='ticket-content'>
                                                     <div class='ticket-content-l'>
-                                                        <div style='font-size:18px'><b>Người mua:</b><i> \${item.owner}</i></div>
-                                                        <div><b>Nhà xe:</b> \${item.agency_name}</div>
+                                                        <div style='font-size:18px'><b>Người mua:</b><i> ${item.owner}</i></div>
+                                                        <div><b>Nhà xe:</b> ${item.agency_name}</div>
                                                     </div>
-                                                    <div class='ticket-content-r'>Giá vé: \${item.price/1000}.000đ</div>
+                                                    <div class='ticket-content-r'>Giá vé: ${item.price/1000}.000đ</div>
                                                     </div>    
                                                 <div class='ticket-datetime'>
                                                     <div class='ticket-datetime-l'>
-                                                        <div><b> Điểm đi:</b> \${item.start_place}</div>
+                                                        <div><b> Điểm đi:</b> ${item.start_place}</div>
                                                         -
-                                                        <div><b> Điểm đến:</b> \${item.end_place}</div>
+                                                        <div><b> Điểm đến:</b> ${item.end_place}</div>
                                                     </div>
-                                                    <div class='ticket-datetime-r'><b>Thời gian:</b> \${item.start_time}</div>
+                                                    <div class='ticket-datetime-r'><b>Thời gian:</b> ${item.start_time}</div>
                                                 </div>    
                                         </div>`
                                     });
                                     return ct;
                                 })()
                             } </div>
-                        `
+                            `
                             },
                             {
                                 title: 'Vé đã dùng',
@@ -152,35 +152,35 @@
                                     let ct = '';
                                     tickets.filter(item => item.status === 'used').forEach(item => {
                                         ct += `<div class='ticket-item-wrapper'>
-                                                <div class='ticket-id' style='margin-bottom: 8px'>No.\${item.id} <span style='font-size: 12px;padding: 2px 4px; background:gray; text-transform: uppercase; border-radius:5px; color:white'>\${ticket_status[item.status]}</span></div>    
+                                                <div class='ticket-id' style='margin-bottom: 8px'>No.${item.id} <span style='font-size: 12px;padding: 2px 4px; background:gray; text-transform: uppercase; border-radius:5px; color:white'>${ticket_status[item.status]}</span></div>    
                                                 <div class='ticket-content'>
                                                     <div class='ticket-content-l'>
-                                                        <div style='font-size:18px'><b>Người mua:</b><i> \${item.owner}</i></div>
-                                                        <div><b>Nhà xe:</b> \${item.agency_name}</div>
+                                                        <div style='font-size:18px'><b>Người mua:</b><i> ${item.owner}</i></div>
+                                                        <div><b>Nhà xe:</b> ${item.agency_name}</div>
                                                     </div>
-                                                    <div class='ticket-content-r'>Giá vé: \${item.price/1000}.000đ</div>
+                                                    <div class='ticket-content-r'>Giá vé: ${item.price/1000}.000đ</div>
                                                     </div>    
                                                 <div class='ticket-datetime'>
                                                     <div class='ticket-datetime-l'>
-                                                        <div><b> Điểm đi:</b> \${item.start_place}</div>
+                                                        <div><b> Điểm đi:</b> ${item.start_place}</div>
                                                         -
-                                                        <div><b> Điểm đến:</b> \${item.end_place}</div>
+                                                        <div><b> Điểm đến:</b> ${item.end_place}</div>
                                                     </div>
-                                                    <div class='ticket-datetime-r'><b>Thời gian:</b> \${item.start_time}</div>
+                                                    <div class='ticket-datetime-r'><b>Thời gian:</b> ${item.start_time}</div>
                                                 </div>    
                                         </div>`
                                     });
                                     return ct;
                                 })()
                             } </div>
-                        `
+                                `
                             },
                             {
                                 title: 'Đăng xuất',
                                 id: 'tab-6',
                                 render: ` <div>
-                            <a class = 'button danger-button'href = '/vexepro/user/logout' > Đăng xuất </a> </div>
-                        `
+                                <a class = 'button danger-button'href = '/vexepro/user/logout' > Đăng xuất </a> </div>
+                                `
                             }
                         ];
                         let activeTab = tabs[0].id;

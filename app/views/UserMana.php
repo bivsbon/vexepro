@@ -26,10 +26,14 @@
                                 id: 'tab-1',
                                 render: `
                                     <div>
-                                        <form action='/vexepro/user/manage' method='POST'>
+                                        <form action='/vexepro/user/manage' method='GET'>
                                             <div style='margin-bottom: 8px'>
-                                                <label style='display: inline-block'>Tìm kiếm theo ID: </label>
-                                                <input class='form-item' name='id' placeholder='Nhập ID để tìm kiếm'/>
+                                                <label style='display: inline-block'>Tìm kiếm: </label>
+                                                <input class='form-item' value='<?php if(array_key_exists('search', $_GET)) echo $_GET['search']?>' name='search' placeholder='Nhập ID, tên đăng nhập, tên, ngày sinh, SĐT, Email hoặc địa chỉ để tìm kiếm'/>
+                                                <select name='status' style='padding: 8px'>
+                                                    <option value='0' <?php if((array_key_exists('status', $_GET)) && ($_GET['status'] == '0')) echo 'selected=\'(true)\'' ?>'>Hoạt động</option>
+                                                    <option value='1' <?php if ((array_key_exists('status', $_GET)) &&  ($_GET['status'] == '1')) echo 'selected=\'(true)\'' ?>'>Vô hiệu hóa</option>
+                                                </select>
                                                 <button type='submit' class='button'>Tìm kiếm</button>
                                             </div>
                                         </form>
@@ -43,7 +47,7 @@
                                         <th> Email</th>
                                         <th> Địa chỉ</th>
                                         <th> Vô hiệu hóa</th>
-                                    </tr>");
+                                    </tr>
                                     <?php foreach ($users as $user) {
                                         print('<tr>
                                                 <td>' . $user->id . '</td>
@@ -143,7 +147,6 @@
                             activeTab = tab.id;
                         }
                     </script>
-
                 </div>
             </div>
         </div>

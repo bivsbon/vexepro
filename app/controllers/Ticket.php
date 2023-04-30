@@ -41,6 +41,6 @@ class Ticket extends Controller {
         $req = Request::getFields();
 
         TicketService::update('status', $req['status'], $req['id']);
-        $this->manage();
+        $this->redirect("/vexepro/ticket/manage");
     }
 }

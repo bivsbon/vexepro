@@ -1,17 +1,18 @@
 <?php
 require_once _DIR_ROOT.'/app/services/StationService.php';
+require_once _DIR_ROOT.'/app/dao/StationDao.php';
 
 class Station extends Controller {
     public function add() : void {
         $fields = Request::getFields();
 
         StationService::add($fields);
-        $this->manage();
+        $this->redirect("/vexepro/station/manage");
     }
 
     public function manage() : void {
         $fields = Request::getFields();
-        if(array_key_exists('id', $fields) && $fields['id'] != '') $data['stations'] = StationService::get("id", "=", $fields['id']);
+        if(array_key_exists('search', $fields) && $fields['search'] != '') $data['stations'] = StationDao::search($fields['search']);
         else{$data['stations'] = StationService::getAll();}
         $this->render('StationMana', $data);
     }
@@ -20,7 +21,7 @@ class Station extends Controller {
         $req = Request::getFields();
 
         StationService::delete($req['id']);
-        $this->manage();
+        $this->redirect("/vexepro/station/manage");
     }
 
 }
