@@ -9,9 +9,13 @@
 <body>
     <?php
     require_once _DIR_ROOT . '/app/views/CustomerNavbar.php';
+
     ?>
 
     <main>
+        <?php
+        if (array_key_exists("errorBookTicket", $_GET)) printf("<script>alert('%s')</script>", $_GET["errorBookTicket"]);
+        ?>
         <div class="container">
             <div class="title">Tìm chuyến</div>
             <div class="wrapper">
@@ -48,7 +52,7 @@
                         </div>
                         <div class="form-item">
                             <label>Ngày đi</label>
-                            <input type="date" name="start_date" class="form-input" value="<?php echo $_GET['start_date'] ?>"></input>
+                            <input type="date" name="start_date" class="form-input" value="<?php if (array_key_exists('start_date', $_GET)) echo $_GET['start_date'] ?>"></input>
                         </div>
                         <div class="form-item">
                             <label>Giá thấp nhất</label>
@@ -119,11 +123,12 @@
     </main>
     <script type='text/javascript'>
         let current_id = 0;
-        function confirm_h(start, end, start_time, end_time, agency_name, phone, bank_name, bank_number, price, tickets){
+
+        function confirm_h(start, end, start_time, end_time, agency_name, phone, bank_name, bank_number, price, tickets) {
             let row = document.forms["ticket-book"]['row'].value;
             let level = document.forms["ticket-book"]['level'].value;
             let seat = document.forms["ticket-book"]['seat'].value;
-            if(tickets.split(" ").includes(row+level+seat)){
+            if (tickets.split(" ").includes(row + level + seat)) {
                 alert("Chỗ đã có người đặt, quý khách vui lòng đặt lại chỗ khác!");
                 return false;
             }
@@ -140,15 +145,16 @@
                     Số tài khoản: ${bank_name} - ${bank_number}
                     Vui lòng thanh toán qua số tài khoản và gửi yêu cầu kích hoạt vé hoặc gọi vào số điện thoại để biết thêm chi tiết!
             `;
-            if(confirm(text)){
-                alert("Đặt vé thành công! Chuyển đến phần thanh toán");
+            if (confirm(text)) {
+                alert("Xác nhận thành công!");
                 return true;
             }
-                
+
         }
+
         function onShow(id, row, level, line, tickets, phone, bank_number, bank_name, start, end, agency_name, price, start_time, end_time) {
             let form = document.createElement('div');
-            
+
             form.innerHTML = `
                     <form name='ticket-book' class='form-wrapper' action='/vexepro/ticket/book' onsubmit='return confirm_h(\"${start}\", \"${end}\", \"${start_time}\", \"${end_time}\", \"${agency_name}\", \"${phone}\", \"${bank_name}\", \"${bank_number}\", \"${price}\", \"${tickets}\", this)'>
                         <div style='display:flex; align-items: center;gap:8px'>
@@ -204,7 +210,7 @@
                         </div>
                         </form>
             `
-            
+
             let newElement = document.getElementById(String(id));
             newElement.appendChild(form);
             if (current_id !== 0) {

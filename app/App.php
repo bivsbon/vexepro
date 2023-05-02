@@ -51,7 +51,7 @@ class App {
 
             require_once 'filters/'.$filterName.'.php';
             $filter = new $filterName($controller, $this->__action, $this->__params);
-            $filter->run();
+            $filter->run($url);
         } else {
             $this->loadError();
         }

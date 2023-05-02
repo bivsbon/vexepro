@@ -1,6 +1,6 @@
 <nav class="navbar">
     <a href="/vexepro/user/manage" style="text-decoration: none; color: black" class="logo">
-        <img src="/vexepro/app/assets/images/logo.png" alt="logo"/>
+        <img src="/vexepro/app/assets/images/logo.png" alt="logo" />
         VÉ XE PRO
     </a>
     <div class="navbar-left">
@@ -17,10 +17,9 @@
                     <a class='button' href='/vexepro/complain/manage'>Khiếu nại</a>
                     <a class='button' href='/vexepro/user/logout'>Đăng xuất</a>
                     ");
-        }
-        else {
-            print('<a class="button primary-button" href="/vexepro/app/views/Login.php">Đăng nhập</a>
-                <a class="button secondary-button" href="/vexepro/user/register">Đăng ký</a>');
+        } else {
+            print('<a class="button primary-button" href="/vexepro/auth/login">Đăng nhập</a>
+                <a class="button secondary-button" href="/vexepro/auth/register">Đăng ký</a>');
         }
         ?>
     </div>

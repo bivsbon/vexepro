@@ -7,6 +7,7 @@ require_once _DIR_ROOT . '/app/services/AgencyService.php';
 abstract class Controller
 {
     protected array $error = [];
+
     public function model($model)
     {
         if (file_exists(_DIR_ROOT . '/app/models/' . $model . ".php")) {
@@ -30,7 +31,8 @@ abstract class Controller
     public function render($view, $data = [])
     {
         $footer = $this->getFooterData();
-        array_push($data, ["error" => $this->error, 'footer' => $footer]);
+        $error = $this->error;
+        array_push($data, ['error' => $error, 'footer' => $footer]);
         extract($data);
         if (file_exists(_DIR_ROOT . '/app/views/' . $view . '.php')) {
             require_once _DIR_ROOT . '/app/views/' . $view . '.php';

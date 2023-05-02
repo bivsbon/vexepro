@@ -88,6 +88,10 @@ class TripService
     {
         return TripDao::getAllWithDetail();
     }
+    public static function getPopularWithDetails(): array
+    {
+        return TripDao::getAllPopularWithDetail();
+    }
     public static function getAllWithDetailsById(int $tripID): array
     {
         return TripDao::getAllWithDetailById($tripID);

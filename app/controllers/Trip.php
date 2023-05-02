@@ -14,12 +14,8 @@ class Trip extends Controller
         $dateNow = date('Y/m/d', time());
 
         // Default filter
-        if (!array_key_exists('beginning', $filter)) $filter['beginning'] = 'Hà Nội';
-        if (!array_key_exists('destination', $filter)) $filter['price_low'] = 'TP. Hồ Chí Minh';
         if (!array_key_exists('price_low', $filter) || $filter['price_low'] == '') $filter['price_low'] = 0;
         if (!array_key_exists('price_high', $filter) || $filter['price_high'] == '') $filter['price_high'] = 10000000;
-        if (!array_key_exists('start_date', $filter) || $filter['start_date'] == '') $filter['start_date'] = $dateNow;
-
         $trips = TripService::search($filter);
 
         foreach ($trips as $trip) {
@@ -28,7 +24,6 @@ class Trip extends Controller
         }
         $data['provinces'] = StationService::getProvinces();
         $data['trips'] = $trips;
-
         $this->render('Search', $data);
     }
 

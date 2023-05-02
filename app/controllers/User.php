@@ -14,26 +14,43 @@ class User extends Controller
     public function login(): void
     {
         $data = Request::getFields();
-        $user = UserService::get('username', 'like', $data['username'])[0];
-
-        if (password_verify($data['password'], $user->password)) {
-            unset($_SESSION['userObj']);
-            unset($_SESSION['adminObj']);
-            if ($user->role == 'customer') {
-                $_SESSION['userObj'] = $user;
-                $this->home->index();
+        $users = UserService::get('username', '=', $data['username']);
+        if (count($users) == 0) {
+            $this->error["login"] = "Tên đăng nhập không tồn tại";
+            $this->render('Login');
+            return;
+        } else {
+            $user = $users[0];
+            if ($user && password_verify($data['password'], $user->password)) {
+                unset($_SESSION['userObj']);
+                unset($_SESSION['adminObj']);
+                if ($user->role == 'customer') {
+                    $_SESSION['userObj'] = $user;
+                    if(array_key_exists("redirectUrl", $data)){
+                        $this->redirect($data["redirectUrl"]);
+                    }
+                    else {
+                        $this->redirect("/vexepro/home/index");
+                    }
+                }
+                if ($user->role == 'admin') {
+                    $_SESSION['adminObj'] = $user;
+                    if(array_key_exists("redirectUrl", $data)){
+                        $this->redirect($data["redirectUrl"]);
+                    }
+                    else {
+                        $this->redirect("/vexepro/user/manage");
+                    }
+                }
+            } else {
+                $this->error["login"] = "Mật khẩu hoặc tên đăng nhập không đúng";
+                $this->render('Login');
+                return;
             }
-            if ($user->role == 'admin') {
-                $_SESSION['adminObj'] = $user;
-                $this->manage();
-            }
-        } else $this->render('Login');
+        }
     }
 
-    public function register(): void
-    {
-        $this->render('Register');
-    }
+
 
     public function signup(): void
     {

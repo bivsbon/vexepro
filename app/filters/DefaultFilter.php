@@ -2,6 +2,6 @@
 require_once _DIR_ROOT.'/app/controllers/Home.php';
 
 class DefaultFilter extends Filter {
-    protected function doFilter() : void {
+    protected function doFilter(string $url) : void {
     }
 }

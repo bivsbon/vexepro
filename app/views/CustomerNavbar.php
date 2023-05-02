@@ -10,8 +10,8 @@
             <a class='button' href='/vexepro/complain/index'>Hỗ trợ</a>
             ");
         } else {
-            print('<a class="button primary-button" href="/vexepro/app/views/Login.php">Đăng nhập</a>
-                <a class="button secondary-button" href="/vexepro/user/register">Đăng ký</a>');
+            print('<a class="button primary-button" href="/vexepro/auth/login">Đăng nhập</a>
+                <a class="button secondary-button" href="/vexepro/auth/register">Đăng ký</a>');
         }
         ?>
     </div>

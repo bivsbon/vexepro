@@ -11,14 +11,14 @@ abstract class Filter {
         $this->params = $params;
     }
 
-    public function run() : void {
-        $this->doFilter();
+    public function run(string $url) : void {
+        $this->doFilter($url);
 
         // Call the method to execute the action
         call_user_func_array([$this->controller, $this->action], $this->params);
     }
 
-    abstract protected function doFilter();
+    abstract protected function doFilter(string $url);
 
     protected function redirect($url, $statusCode = 303) : void {
         header('Location: ' . $url, true, $statusCode);
